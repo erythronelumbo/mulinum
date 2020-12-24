@@ -36,5 +36,10 @@ Run `make install` to install the library, as well as its documentation.
 
 The documentation will be installed in `path/to/your/libraries/doc/cynodelic/mulinum`.
 
+## To-do
+
+- Add more data types (e.g. map)
+- Add a functionality for *lambda expressions* if possible
+
 ## License
 This library is licensed under the Boost Software License.
