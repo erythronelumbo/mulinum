@@ -42,6 +42,21 @@ struct concat_impl {};
  */
 template <
 	typename   IntType,
+	IntType... Items
+>
+struct concat_impl<
+	vector_c<IntType, Items...>
+>
+{
+	using type = vector_c<IntType, Items...>;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
+template <
+	typename   IntType,
 	IntType... ItemsL,
 	IntType... ItemsR
 >
@@ -92,6 +107,18 @@ struct concat_impl<
 /**
  * @brief Helper for `concat`.
  */
+template <char... Items>
+struct concat_impl<
+	string<Items...>
+>
+{
+	using type = string<Items...>;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
 template <char... ItemsL,char... ItemsR,typename... Others>
 struct concat_impl<
 	string<ItemsL...>,
@@ -103,6 +130,20 @@ struct concat_impl<
 		string<ItemsL...,ItemsR...>,
 		Others...
 	>::type;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
+template <
+	typename... Items
+>
+struct concat_impl<
+	vector<Items...>
+>
+{
+	using type = vector<Items...>;
 };
 
 
@@ -143,6 +184,33 @@ struct concat_impl<
 		vector<ItemsA...,ItemsB...>,
 		Others...
 	>::type;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
+template <
+	typename Head,
+	typename Tail
+>
+struct concat_impl<
+	list_node<Head, Tail>
+>
+{
+	using type = list_node<Head, Tail>;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
+template <>
+struct concat_impl<
+	null_type
+>
+{
+	using type = null_type;
 };
 
 
@@ -238,6 +306,22 @@ struct concat_impl<
 >
 {
 	using type = null_type;
+};
+
+
+/**
+ * @brief Helper for `concat`.
+ */
+template <
+	typename IntType,
+	IntType  Head,
+	typename Tail
+>
+struct concat_impl<
+	list_node_c<IntType, Head, Tail>
+>
+{
+	using type = list_node_c<IntType, Head, Tail>;
 };
 
 
