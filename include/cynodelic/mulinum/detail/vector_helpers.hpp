@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,29 +34,29 @@ namespace detail
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <typename,typename>
+	template <typename, typename>
 	struct isq_cat_two;
 
 
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t... Lhs,std::size_t... Rhs>
-	struct isq_cat_two<idx_seq<Lhs...>,idx_seq<Rhs...>>
+	template <std::size_t... Lhs, std::size_t... Rhs>
+	struct isq_cat_two<idx_seq<Lhs...>, idx_seq<Rhs...>>
 	{
-		using type = idx_seq<Lhs...,Rhs...>;
+		using type = idx_seq<Lhs..., Rhs...>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t Count,std::size_t Max,bool = (Count == Max)>
+	template <std::size_t Count, std::size_t Max, bool = (Count == Max)>
 	struct make_isq
 	{
 		using type = typename isq_cat_two<
 			idx_seq<Count>,
-			typename make_isq<Count + 1,Max,(Count + 1) == Max>::type
+			typename make_isq<Count + 1, Max, (Count + 1) == Max>::type
 		>::type;
 	};
 
@@ -64,8 +64,8 @@ namespace detail
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t Count,std::size_t Max>
-	struct make_isq<Count,Max,true>
+	template <std::size_t Count, std::size_t Max>
+	struct make_isq<Count, Max, true>
 	{
 		using type = idx_seq<>;
 	};
@@ -74,7 +74,7 @@ namespace detail
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t Idx,typename Item>
+	template <std::size_t Idx, typename Item>
 	struct vector_item
 	{
 		using item_type = Item;
@@ -84,30 +84,30 @@ namespace detail
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <typename,typename...>
+	template <typename, typename...>
 	struct vector_impl;
 
 
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t... Ids,typename... Items>
-	struct vector_impl<idx_seq<Ids...>,Items...> :
-		vector_item<Ids,Items>...
+	template <std::size_t... Ids, typename... Items>
+	struct vector_impl<idx_seq<Ids...>, Items...> :
+		vector_item<Ids, Items>...
 	{};
 
 
 	/**
 	 * @brief Helper for @ref vector.
 	 */
-	template <std::size_t Idx,typename T>
-	inline constexpr auto vector_get(vector_item<Idx,T>) -> vector_item<Idx,T>;
+	template <std::size_t Idx, typename T>
+	inline constexpr auto vector_get(vector_item<Idx, T>) -> vector_item<Idx, T>;
 
 
 	/**
 	 * @brief Helper for @ref at.
 	 */
-	template <typename VecT,std::size_t Idx,typename VecItem = decltype(vector_get<Idx>(VecT{}))>
+	template <typename VecT, std::size_t Idx, typename VecItem = decltype(vector_get<Idx>(VecT{}))>
 	struct vector_at
 	{
 		using type = typename VecItem::item_type;

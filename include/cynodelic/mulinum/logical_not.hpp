@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,8 +33,8 @@ struct logical_not_impl {};
  * @brief Helper for `logical_not`.
  */
 template <bool Value>
-struct logical_not_impl<integer_c<bool,Value>> :
-	integer_c<bool,!Value>
+struct logical_not_impl<integer_c<bool, Value>> :
+	integer_c<bool, !Value>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -44,7 +44,7 @@ struct logical_not_impl<integer_c<bool,Value>> :
  * @ingroup logicops
  * @brief Logical NOT.
  *
- * Negates a boolean value.
+ * Negates the value of a boolean value.
  *
  * @param BoolC A boolean type (@ref bool_c).
  */

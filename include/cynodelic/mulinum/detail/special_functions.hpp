@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -29,9 +29,9 @@ namespace detail
 	 +
 	 * Calculates the greatest common divisor of two numbers.
 	 */
-	inline constexpr std::intmax_t gcd(const std::intmax_t& val_a,const std::intmax_t& val_b)
+	inline constexpr std::intmax_t gcd(const std::intmax_t& val_a, const std::intmax_t& val_b)
 	{
-		return (val_b == 0) ? val_a : gcd(val_b,val_a % val_b);
+		return (val_b == 0) ? val_a : gcd(val_b, val_a % val_b);
 	}
 
 	
@@ -62,9 +62,9 @@ namespace detail
 	 +
 	 * Simplifies a numerator, given a numerator and a denuminator.
 	 */
-	inline constexpr std::intmax_t simplify_num(const std::intmax_t& num,const std::intmax_t& den)
+	inline constexpr std::intmax_t simplify_num(const std::intmax_t& num, const std::intmax_t& den)
 	{
-		return (sign(den)*num)/gcd(iabs(num),iabs(den));
+		return (sign(den)*num)/gcd(iabs(num), iabs(den));
 	}
 
 	
@@ -73,9 +73,9 @@ namespace detail
 	 +
 	 * Simplifies a denominator, given a numerator and a denuminator.
 	 */
-	inline constexpr std::intmax_t simplify_den(const std::intmax_t& num,const std::intmax_t& den)
+	inline constexpr std::intmax_t simplify_den(const std::intmax_t& num, const std::intmax_t& den)
 	{
-		return iabs(den)/gcd(iabs(num),iabs(den));
+		return iabs(den)/gcd(iabs(num), iabs(den));
 	}
 } // end of "detail" namespace
 

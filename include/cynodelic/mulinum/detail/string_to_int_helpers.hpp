@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,8 +34,8 @@ namespace detail
 	/**
 	 * @brief Helper for @ref string_to_int.
 	 */
-	template <char First,char... Others>
-	struct has_digits<string<First,Others...>> :
+	template <char First, char... Others>
+	struct has_digits<string<First, Others...>> :
 		bool_c<(First >= '0' && First <= '9') && has_digits<string<Others...>>::value>
 	{};
 
@@ -52,15 +52,15 @@ namespace detail
 	/**
 	 * @brief Helper for @ref string_to_int.
 	 */
-	template <typename IntType,typename,std::size_t,IntType,bool>
+	template <typename IntType, typename, std::size_t, IntType, bool>
 	struct make_int_from_string;
 
 
 	/**
 	 * @brief Helper for @ref string_to_int.
 	 */
-	template <typename IntType,char... Chars,std::size_t Pos,IntType Factor>
-	struct make_int_from_string<IntType,string<Chars...>,Pos,Factor,false> :
+	template <typename IntType, char... Chars, std::size_t Pos, IntType Factor>
+	struct make_int_from_string<IntType, string<Chars...>, Pos, Factor, false> :
 		integer_c<
 			IntType,
 			Factor*static_cast<IntType>(string<Chars...>::data[Pos] - '0') +
@@ -78,8 +78,8 @@ namespace detail
 	/**
 	 * @brief Helper for @ref string_to_int.
 	 */
-	template <typename IntType,char... Chars,std::size_t Pos,IntType Factor>
-	struct make_int_from_string<IntType,string<Chars...>,Pos,Factor,true> :
+	template <typename IntType, char... Chars, std::size_t Pos, IntType Factor>
+	struct make_int_from_string<IntType, string<Chars...>, Pos, Factor, true> :
 		integer_c<
 			IntType,
 			Factor*static_cast<IntType>(string<Chars...>::data[Pos] - '0')

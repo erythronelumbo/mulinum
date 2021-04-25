@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,7 +34,7 @@ namespace experimental
 	/**
 	 * @brief Helper for `sqrt_c`.
 	 */
-	template <std::intmax_t N,std::size_t Iterations>
+	template <std::intmax_t N, std::size_t Iterations>
 	struct sqrt_c_impl :
 		add<
 			rational<1>,
@@ -42,7 +42,7 @@ namespace experimental
 				rational<N - 1>,
 				add<
 					rational<1>,
-					typename sqrt_c_impl<N,Iterations - 1>::type
+					typename sqrt_c_impl<N, Iterations - 1>::type
 				>
 			>
 		>
@@ -53,10 +53,10 @@ namespace experimental
 	 * @brief Helper for `sqrt_c`.
 	 */
 	template <std::intmax_t N>
-	struct sqrt_c_impl<N,1> :
+	struct sqrt_c_impl<N, 1> :
 		add<
 			rational<1>,
-			rational<N - 1,2>
+			rational<N - 1, 2>
 		>
 	{};
 
@@ -73,8 +73,8 @@ namespace experimental
 	 * @param N          The value.
 	 * @param Iterations Number of iterations.
 	 */
-	template <std::intmax_t N,std::size_t Iterations>
-	using sqrt_c = typename sqrt_c_impl<N,Iterations>::type;
+	template <std::intmax_t N, std::size_t Iterations>
+	using sqrt_c = typename sqrt_c_impl<N, Iterations>::type;
 } // end of "experimental" namespace
 
 

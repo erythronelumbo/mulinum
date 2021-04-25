@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,7 +33,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `sort`.
  */
-template <typename,typename,bool>
+template <typename, typename, bool>
 struct sort_impl {};
 
 
@@ -41,20 +41,20 @@ struct sort_impl {};
  * @brief Helper for `sort`.
  */
 template <
-	typename IntType,IntType... Items,
+	typename IntType, IntType... Items,
 	typename Comparator
 >
-struct sort_impl<vector_c<IntType,Items...>,Comparator,false>
+struct sort_impl<vector_c<IntType, Items...>, Comparator, false>
 {
-	using input = vector_c<IntType,Items...>;
+	using input = vector_c<IntType, Items...>;
 	using type  = detail::sort_merge<
 		typename sort_impl<
-			take_c<input,0,(input::size/2)>,
+			take_c<input, 0, (input::size/2)>,
 			Comparator,
 			((input::size/2) < 2)
 		>::type,
 		typename sort_impl<
-			take_c<input,(input::size/2),(input::size - input::size/2)>,
+			take_c<input, (input::size/2), (input::size - input::size/2)>,
 			Comparator,
 			((input::size - input::size/2) < 2)
 		>::type,
@@ -67,12 +67,12 @@ struct sort_impl<vector_c<IntType,Items...>,Comparator,false>
  * @brief Helper for `sort`.
  */
 template <
-	typename IntType,IntType... Items,
+	typename IntType, IntType... Items,
 	typename Comparator
 >
-struct sort_impl<vector_c<IntType,Items...>,Comparator,true>
+struct sort_impl<vector_c<IntType, Items...>, Comparator, true>
 {
-	using type = vector_c<IntType,Items...>;
+	using type = vector_c<IntType, Items...>;
 };
 
 
@@ -83,17 +83,17 @@ template <
 	char...  Items,
 	typename Comparator
 >
-struct sort_impl<string<Items...>,Comparator,false>
+struct sort_impl<string<Items...>, Comparator, false>
 {
 	using input = string<Items...>;
 	using type  = detail::sort_merge<
 		typename sort_impl<
-			take_c<input,0,(input::size/2)>,
+			take_c<input, 0, (input::size/2)>,
 			Comparator,
 			((input::size/2) < 2)
 		>::type,
 		typename sort_impl<
-			take_c<input,(input::size/2),(input::size - input::size/2)>,
+			take_c<input, (input::size/2), (input::size - input::size/2)>,
 			Comparator,
 			((input::size - input::size/2) < 2)
 		>::type,
@@ -109,7 +109,7 @@ template <
 	char...  Items,
 	typename Comparator
 >
-struct sort_impl<string<Items...>,Comparator,true>
+struct sort_impl<string<Items...>, Comparator, true>
 {
 	using type = string<Items...>;
 };
@@ -119,20 +119,20 @@ struct sort_impl<string<Items...>,Comparator,true>
  * @brief Helper for `sort`.
  */
 template <
-	typename IntType,IntType Head,typename Tail,
+	typename IntType, IntType Head, typename Tail,
 	typename Comparator
 >
-struct sort_impl<list_node_c<IntType,Head,Tail>,Comparator,false>
+struct sort_impl<list_node_c<IntType, Head, Tail>, Comparator, false>
 {
-	using input = list_node_c<IntType,Head,Tail>;
+	using input = list_node_c<IntType, Head, Tail>;
 	using type  = detail::sort_merge<
 		typename sort_impl<
-			take_c<input,0,(input::size/2)>,
+			take_c<input, 0, (input::size/2)>,
 			Comparator,
 			((input::size/2) < 2)
 		>::type,
 		typename sort_impl<
-			take_c<input,(input::size/2),(input::size - input::size/2)>,
+			take_c<input, (input::size/2), (input::size - input::size/2)>,
 			Comparator,
 			((input::size - input::size/2) < 2)
 		>::type,
@@ -145,12 +145,12 @@ struct sort_impl<list_node_c<IntType,Head,Tail>,Comparator,false>
  * @brief Helper for `sort`.
  */
 template <
-	typename IntType,IntType Head,typename Tail,
+	typename IntType, IntType Head, typename Tail,
 	typename Comparator
 >
-struct sort_impl<list_node_c<IntType,Head,Tail>,Comparator,true>
+struct sort_impl<list_node_c<IntType, Head, Tail>, Comparator, true>
 {
-	using type = list_node_c<IntType,Head,Tail>;
+	using type = list_node_c<IntType, Head, Tail>;
 };
 
 
@@ -161,17 +161,17 @@ template <
 	typename... Items,
 	typename    Comparator
 >
-struct sort_impl<vector<Items...>,Comparator,false>
+struct sort_impl<vector<Items...>, Comparator, false>
 {
 	using input = vector<Items...>;
 	using type  = detail::sort_merge<
 		typename sort_impl<
-			take_c<input,0,(input::size/2)>,
+			take_c<input, 0, (input::size/2)>,
 			Comparator,
 			((input::size/2) < 2)
 		>::type,
 		typename sort_impl<
-			take_c<input,(input::size/2),(input::size - input::size/2)>,
+			take_c<input, (input::size/2), (input::size - input::size/2)>,
 			Comparator,
 			((input::size - input::size/2) < 2)
 		>::type,
@@ -187,7 +187,7 @@ template <
 	typename... Items,
 	typename    Comparator
 >
-struct sort_impl<vector<Items...>,Comparator,true>
+struct sort_impl<vector<Items...>, Comparator, true>
 {
 	using type = vector<Items...>;
 };
@@ -197,20 +197,20 @@ struct sort_impl<vector<Items...>,Comparator,true>
  * @brief Helper for `sort`.
  */
 template <
-	typename Head,typename Tail,
+	typename Head, typename Tail,
 	typename Comparator
 >
-struct sort_impl<list_node<Head,Tail>,Comparator,false>
+struct sort_impl<list_node<Head, Tail>, Comparator, false>
 {
-	using input = list_node<Head,Tail>;
+	using input = list_node<Head, Tail>;
 	using type  = detail::sort_merge<
 		typename sort_impl<
-			take_c<input,0,(input::size/2)>,
+			take_c<input, 0, (input::size/2)>,
 			Comparator,
 			((input::size/2) < 2)
 		>::type,
 		typename sort_impl<
-			take_c<input,(input::size/2),(input::size - input::size/2)>,
+			take_c<input, (input::size/2), (input::size - input::size/2)>,
 			Comparator,
 			((input::size - input::size/2) < 2)
 		>::type,
@@ -223,12 +223,12 @@ struct sort_impl<list_node<Head,Tail>,Comparator,false>
  * @brief Helper for `sort`.
  */
 template <
-	typename Head,typename Tail,
+	typename Head, typename Tail,
 	typename Comparator
 >
-struct sort_impl<list_node<Head,Tail>,Comparator,true>
+struct sort_impl<list_node<Head, Tail>, Comparator, true>
 {
-	using type = list_node<Head,Tail>;
+	using type = list_node<Head, Tail>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -245,8 +245,8 @@ struct sort_impl<list_node<Head,Tail>,Comparator,true>
  * @param Container  The container.
  * @param Comparator The comparator (a metafunction object).
  */
-template <typename Container,typename Comparator>
-using sort = typename sort_impl<Container,Comparator,(Container::size < 2)>::type;
+template <typename Container, typename Comparator>
+using sort = typename sort_impl<Container, Comparator, (Container::size < 2)>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

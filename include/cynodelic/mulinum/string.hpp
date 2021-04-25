@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -46,7 +46,7 @@ struct string
 	static constexpr std::size_t size = sizeof...(Chars);
 
 	/// @brief Array containing all the items (as a C-string).
-	static constexpr char data[size + 1] = {Chars...,'\0'};
+	static constexpr char data[size + 1] = {Chars..., '\0'};
 
 	/// @brief Acceses an element from the string, if it is initialized as a value.
 	constexpr char operator[](const std::size_t& idx) const

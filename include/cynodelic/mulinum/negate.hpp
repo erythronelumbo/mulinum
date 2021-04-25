@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -35,20 +35,20 @@ struct negate_impl {};
 /**
  * @brief Helper for `negate`.
  */
-template <typename IntType,IntType Value>
-struct negate_impl<integer_c<IntType,Value>> :
-	integer_c<IntType,-Value>
+template <typename IntType, IntType Value>
+struct negate_impl<integer_c<IntType, Value>> :
+	integer_c<IntType, -Value>
 {};
 
 
 /**
  * @brief Helper for `negate`.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-struct negate_impl<rational<Num,Den>> :
+template <std::intmax_t Num, std::intmax_t Den>
+struct negate_impl<rational<Num, Den>> :
 	rational<
-		-rational<Num,Den>::num,
-		rational<Num,Den>::den
+		-rational<Num, Den>::num,
+		rational<Num, Den>::den
 	>
 {};
 
@@ -61,7 +61,7 @@ struct negate_impl<rational<Num,Den>> :
  *
  * Returns the negative of an arithmetic type (similar to `-value`).
  *
- * @param ArithmeticType An arithmetic type.
+ * @param ArithmeticType Any arithmetic type.
  */
 template <typename ArithmeticType>
 using negate = typename negate_impl<ArithmeticType>::type;

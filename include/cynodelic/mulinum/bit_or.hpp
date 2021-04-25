@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,13 +34,13 @@ struct bit_or_impl {};
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR
+	IntType ValueL, IntType ValueR
 >
 struct bit_or_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>
 > :
-	integer_c<IntType,ValueL | ValueR>
+	integer_c<IntType, ValueL | ValueR>
 {};
 
 
@@ -48,16 +48,16 @@ struct bit_or_impl<
  * @brief Helper for `bit_or`.
  */
 template <
-	typename IntType,
-	IntType ValueL,IntType ValueR,
+	typename IntType, 
+	IntType ValueL, IntType ValueR,
 	typename... Others
 	>
 struct bit_or_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>,
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>,
 	Others...
 > :
-	bit_or_impl<integer_c<IntType,ValueL | ValueR>,Others...>
+	bit_or_impl<integer_c<IntType, ValueL | ValueR>, Others...>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -67,9 +67,10 @@ struct bit_or_impl<
  * @ingroup arithmeticops
  * @brief Bitwise OR.
  *
- * Performs bitwise OR of integer types of the same type (@ref integer_c s).
+ * Performs bitwise OR at least two of integer types of the same type
+ * (@ref integer_c s).
  *
- * @param Integers... All the types.
+ * @param Integers... Integer types.
  */
 template <typename... Integers>
 using bit_or = typename bit_or_impl<Integers...>::type;

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,15 +30,15 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class,typename>
+template <template <typename...> class, typename>
 struct fold_right_impl {};
 
 
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class MetaFn,typename SingleItem>
-struct fold_right_impl<MetaFn,vector<SingleItem>>
+template <template <typename...> class MetaFn, typename SingleItem>
+struct fold_right_impl<MetaFn, vector<SingleItem>>
 {
 	using type = SingleItem;
 };
@@ -47,22 +47,22 @@ struct fold_right_impl<MetaFn,vector<SingleItem>>
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class MetaFn,typename First,typename Second>
-struct fold_right_impl<MetaFn,vector<First,Second>>
+template <template <typename...> class MetaFn, typename First, typename Second>
+struct fold_right_impl<MetaFn, vector<First, Second>>
 {
-	using type = MetaFn<First,Second>;
+	using type = MetaFn<First, Second>;
 };
 
 
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class MetaFn,typename First,typename... Others>
-struct fold_right_impl<MetaFn,vector<First,Others...>>
+template <template <typename...> class MetaFn, typename First, typename... Others>
+struct fold_right_impl<MetaFn, vector<First, Others...>>
 {
 	using type = MetaFn<
 		First,
-		typename fold_right_impl<MetaFn,vector<Others...>>::type
+		typename fold_right_impl<MetaFn, vector<Others...>>::type
 	>;
 };
 
@@ -71,7 +71,7 @@ struct fold_right_impl<MetaFn,vector<First,Others...>>
  * @brief Helper for `fold_right`.
  */
 template <template <typename...> class MetaFn>
-struct fold_right_impl<MetaFn,null_type>
+struct fold_right_impl<MetaFn, null_type>
 {
 	using type = null_type;
 };
@@ -80,8 +80,8 @@ struct fold_right_impl<MetaFn,null_type>
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class MetaFn,typename Head>
-struct fold_right_impl<MetaFn,list_node<Head,null_type>>
+template <template <typename...> class MetaFn, typename Head>
+struct fold_right_impl<MetaFn, list_node<Head, null_type>>
 {
 	using type = Head;
 };
@@ -90,12 +90,12 @@ struct fold_right_impl<MetaFn,list_node<Head,null_type>>
 /**
  * @brief Helper for `fold_right`.
  */
-template <template <typename...> class MetaFn,typename Head,typename Tail>
-struct fold_right_impl<MetaFn,list_node<Head,Tail>>
+template <template <typename...> class MetaFn, typename Head, typename Tail>
+struct fold_right_impl<MetaFn, list_node<Head, Tail>>
 {
 	using type = MetaFn<
 		Head,
-		typename fold_right_impl<MetaFn,Tail>::type
+		typename fold_right_impl<MetaFn, Tail>::type
 	>;
 };
 
@@ -109,11 +109,12 @@ struct fold_right_impl<MetaFn,list_node<Head,Tail>>
  * Combines all the elements of a container, from right to left, applying a
  * binary metafunction.
  *
- * @param MetaFn        The binary metafunction (of two arguments or variadic).
+ * @param MetaFn        The binary metafunction (of two arguments, it can be
+ *                      variadic).
  * @param TypeContainer The container.
  */
-template <template <typename...> class MetaFn,typename TypeContainer>
-using fold_right = typename fold_right_impl<MetaFn,TypeContainer>::type;
+template <template <typename...> class MetaFn, typename TypeContainer>
+using fold_right = typename fold_right_impl<MetaFn, TypeContainer>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

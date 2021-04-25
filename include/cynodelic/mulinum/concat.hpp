@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -61,11 +61,11 @@ template <
 	IntType... ItemsR
 >
 struct concat_impl<
-	vector_c<IntType,ItemsL...>,
-	vector_c<IntType,ItemsR...>
+	vector_c<IntType, ItemsL...>,
+	vector_c<IntType, ItemsR...>
 >
 {
-	using type = vector_c<IntType,ItemsL...,ItemsR...>;
+	using type = vector_c<IntType, ItemsL..., ItemsR...>;
 };
 
 
@@ -79,13 +79,13 @@ template <
 	typename... Others
 >
 struct concat_impl<
-	vector_c<IntType,ItemsL...>,
-	vector_c<IntType,ItemsR...>,
+	vector_c<IntType, ItemsL...>,
+	vector_c<IntType, ItemsR...>,
 	Others...
 >
 {
 	using type = typename concat_impl<
-		vector_c<IntType,ItemsL...,ItemsR...>,
+		vector_c<IntType, ItemsL..., ItemsR...>,
 		Others...
 	>::type;
 };
@@ -94,13 +94,13 @@ struct concat_impl<
 /**
  * @brief Helper for `concat`.
  */
-template <char... ItemsL,char... ItemsR>
+template <char... ItemsL, char... ItemsR>
 struct concat_impl<
 	string<ItemsL...>,
 	string<ItemsR...>
 >
 {
-	using type = string<ItemsL...,ItemsR...>;
+	using type = string<ItemsL..., ItemsR...>;
 };
 
 
@@ -119,7 +119,7 @@ struct concat_impl<
 /**
  * @brief Helper for `concat`.
  */
-template <char... ItemsL,char... ItemsR,typename... Others>
+template <char... ItemsL, char... ItemsR, typename... Others>
 struct concat_impl<
 	string<ItemsL...>,
 	string<ItemsR...>,
@@ -127,7 +127,7 @@ struct concat_impl<
 >
 {
 	using type = typename concat_impl<
-		string<ItemsL...,ItemsR...>,
+		string<ItemsL..., ItemsR...>,
 		Others...
 	>::type;
 };
@@ -181,7 +181,7 @@ struct concat_impl<
 >
 {
 	using type = typename concat_impl<
-		vector<ItemsA...,ItemsB...>,
+		vector<ItemsA..., ItemsB...>,
 		Others...
 	>::type;
 };
@@ -223,12 +223,12 @@ template <
 	typename... Others
 >
 struct concat_impl<
-	list_node<LhsHead,LhsTail>,
+	list_node<LhsHead, LhsTail>,
 	Others...
 >
 {
 	using type = typename detail::list_concat_helper<
-		list_node<LhsHead,LhsTail>,
+		list_node<LhsHead, LhsTail>,
 		typename concat_impl<Others...>::type
 	>::type;
 };
@@ -251,17 +251,17 @@ struct concat_impl<
  * @brief Helper for `concat`.
  */
 template <
-	typename LhsHead,typename LhsTail,
-	typename RhsHead,typename RhsTail
+	typename LhsHead, typename LhsTail,
+	typename RhsHead, typename RhsTail
 >
 struct concat_impl<
-	list_node<LhsHead,LhsTail>,
-	list_node<RhsHead,RhsTail>
+	list_node<LhsHead, LhsTail>,
+	list_node<RhsHead, RhsTail>
 >
 {
 	using type = typename detail::list_concat_helper<
-		list_node<LhsHead,LhsTail>,
-		list_node<RhsHead,RhsTail>
+		list_node<LhsHead, LhsTail>,
+		list_node<RhsHead, RhsTail>
 	>::type;
 };
 
@@ -270,14 +270,14 @@ struct concat_impl<
  * @brief Helper for `concat`.
  */
 template <
-	typename LhsHead,typename LhsTail
+	typename LhsHead, typename LhsTail
 >
 struct concat_impl<
-	list_node<LhsHead,LhsTail>,
+	list_node<LhsHead, LhsTail>,
 	null_type
 >
 {
-	using type = list_node<LhsHead,LhsTail>;
+	using type = list_node<LhsHead, LhsTail>;
 };
 
 
@@ -285,14 +285,14 @@ struct concat_impl<
  * @brief Helper for `concat`.
  */
 template <
-	typename RhsHead,typename RhsTail
+	typename RhsHead, typename RhsTail
 >
 struct concat_impl<
 	null_type,
-	list_node<RhsHead,RhsTail>
+	list_node<RhsHead, RhsTail>
 >
 {
-	using type = list_node<RhsHead,RhsTail>;
+	using type = list_node<RhsHead, RhsTail>;
 };
 
 
@@ -335,12 +335,12 @@ template <
 	typename... Others
 >
 struct concat_impl<
-	list_node_c<IntType,LhsHead,LhsTail>,
+	list_node_c<IntType, LhsHead, LhsTail>,
 	Others...
 >
 {
 	using type = typename detail::list_c_concat_helper<
-		list_node_c<IntType,LhsHead,LhsTail>,
+		list_node_c<IntType, LhsHead, LhsTail>,
 		typename concat_impl<Others...>::type
 	>::type;
 };
@@ -351,17 +351,17 @@ struct concat_impl<
  */
 template <
 	typename IntType,
-	IntType LhsHead,typename LhsTail,
-	IntType RhsHead,typename RhsTail
+	IntType LhsHead, typename LhsTail,
+	IntType RhsHead, typename RhsTail
 >
 struct concat_impl<
-	list_node_c<IntType,LhsHead,LhsTail>,
-	list_node_c<IntType,RhsHead,RhsTail>
+	list_node_c<IntType, LhsHead, LhsTail>,
+	list_node_c<IntType, RhsHead, RhsTail>
 >
 {
 	using type = typename detail::list_c_concat_helper<
-		list_node_c<IntType,LhsHead,LhsTail>,
-		list_node_c<IntType,RhsHead,RhsTail>
+		list_node_c<IntType, LhsHead, LhsTail>,
+		list_node_c<IntType, RhsHead, RhsTail>
 	>::type;
 };
 
@@ -371,14 +371,14 @@ struct concat_impl<
  */
 template <
 	typename IntType,
-	IntType LhsHead,typename LhsTail
+	IntType LhsHead, typename LhsTail
 >
 struct concat_impl<
-	list_node_c<IntType,LhsHead,LhsTail>,
+	list_node_c<IntType, LhsHead, LhsTail>,
 	null_type
 >
 {
-	using type = list_node_c<IntType,LhsHead,LhsTail>;
+	using type = list_node_c<IntType, LhsHead, LhsTail>;
 };
 
 
@@ -387,14 +387,14 @@ struct concat_impl<
  */
 template <
 	typename IntType,
-	IntType RhsHead,typename RhsTail
+	IntType RhsHead, typename RhsTail
 >
 struct concat_impl<
 	null_type,
-	list_node_c<IntType,RhsHead,RhsTail>
+	list_node_c<IntType, RhsHead, RhsTail>
 >
 {
-	using type = list_node_c<IntType,RhsHead,RhsTail>;
+	using type = list_node_c<IntType, RhsHead, RhsTail>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS

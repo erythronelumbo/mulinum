@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,12 +30,12 @@ namespace cynodelic { namespace mulinum {
  *
  * A variadic type container.
  *
- * @param Items... The container elements.
+ * @param Items... The contained elements.
  */
 template <typename... Items>
 struct vector : 
 	detail::vector_impl<
-		typename detail::make_isq<0,sizeof...(Items),(sizeof...(Items) == 0)>::type,
+		typename detail::make_isq<0, sizeof...(Items), (sizeof...(Items) == 0)>::type,
 		Items...
 	>
 {

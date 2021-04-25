@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,34 +34,34 @@ struct logical_and_impl {};
  */
 template <bool Value>
 struct logical_and_impl<
-	integer_c<bool,Value>
+	integer_c<bool, Value>
 > :
-	integer_c<bool,Value>
+	integer_c<bool, Value>
 {};
 
 
 /**
  * @brief Helper for `logical_and`.
  */
-template <bool ValueL,bool ValueR>
+template <bool ValueL, bool ValueR>
 struct logical_and_impl<
-	integer_c<bool,ValueL>,
-	integer_c<bool,ValueR>
+	integer_c<bool, ValueL>,
+	integer_c<bool, ValueR>
 > :
-	integer_c<bool,ValueL && ValueR>
+	integer_c<bool, ValueL && ValueR>
 {};
 
 
 /**
  * @brief Helper for `logical_and`.
  */
-template <bool ValueL,bool ValueR,typename... Others>
+template <bool ValueL, bool ValueR, typename... Others>
 struct logical_and_impl<
-	integer_c<bool,ValueL>,
-	integer_c<bool,ValueR>,
+	integer_c<bool, ValueL>,
+	integer_c<bool, ValueR>,
 	Others...
 > :
-	logical_and_impl<integer_c<bool,ValueL && ValueR>,Others...>
+	logical_and_impl<integer_c<bool, ValueL && ValueR>, Others...>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -71,9 +71,9 @@ struct logical_and_impl<
  * @ingroup logicops
  * @brief Logical AND.
  *
- * Performs logical AND of boolean types (@ref bool_c).
+ * Performs logical AND of at least one boolean type (@ref bool_c).
  *
- * @param Booleans... All the types.
+ * @param Booleans... Boolean types.
  */
 template <typename... Booleans>
 using logical_and = typename logical_and_impl<Booleans...>::type;

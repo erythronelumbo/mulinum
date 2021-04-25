@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -46,7 +46,8 @@ struct is_placeholder_impl<arg<ArgNum>> : true_ {};
  * @ingroup typetraits
  * @brief Checks if a type is a placeholder.
  *
- * Checks if a type `T` is a placeholder (see @ref placeholders and @ref arg).
+ * Checks if a type `T` is a placeholder (see @ref placeholders and @ref arg),
+ * resulting in @ref true_ or @ref false_ .
  */
 template <typename T>
 using is_placeholder = typename is_placeholder_impl<T>::type;

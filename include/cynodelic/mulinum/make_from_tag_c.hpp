@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,43 +33,43 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `make_from_tag_c`.
  */
-template <typename TypeTag,typename,value_type_of<TypeTag>...>
+template <typename TypeTag, typename, value_type_of<TypeTag>...>
 struct make_from_tag_c_impl {};
 
 
 /**
  * @brief Helper for `make_from_tag_c`.
  */
-template <typename IntType,value_type_of<integer_tag<IntType>> Val>
-struct make_from_tag_c_impl<integer_tag<IntType>,void,Val> :
-	integer_c<IntType,Val>
+template <typename IntType, value_type_of<integer_tag<IntType>> Val>
+struct make_from_tag_c_impl<integer_tag<IntType>, void, Val> :
+	integer_c<IntType, Val>
 {};
 
 
 /**
  * @brief Helper for `make_from_tag_c`.
  */
-template <typename RationalTag,value_type_of<RationalTag> Num,value_type_of<RationalTag> Den>
-struct make_from_tag_c_impl<RationalTag,detail::enable_if<equals<RationalTag,rational_tag>::value>,Num,Den> :
-	rational<Num,Den>
+template <typename RationalTag, value_type_of<RationalTag> Num, value_type_of<RationalTag> Den>
+struct make_from_tag_c_impl<RationalTag, detail::enable_if<equals<RationalTag, rational_tag>::value>, Num, Den> :
+	rational<Num, Den>
 {};
 
 
 /**
  * @brief Helper for `make_from_tag_c`.
  */
-template <typename IntType,value_type_of<vector_c_tag<IntType>>... Items>
-struct make_from_tag_c_impl<vector_c_tag<IntType>,void,Items...> :
-	vector_c<IntType,Items...>
+template <typename IntType, value_type_of<vector_c_tag<IntType>>... Items>
+struct make_from_tag_c_impl<vector_c_tag<IntType>, void, Items...> :
+	vector_c<IntType, Items...>
 {};
 
 
 /**
  * @brief Helper for `make_from_tag_c`.
  */
-template <typename IntType,value_type_of<list_c_tag<IntType>>... Items>
-struct make_from_tag_c_impl<list_c_tag<IntType>,void,Items...> :
-	list_c<IntType,Items...>
+template <typename IntType, value_type_of<list_c_tag<IntType>>... Items>
+struct make_from_tag_c_impl<list_c_tag<IntType>, void, Items...> :
+	list_c<IntType, Items...>
 {};
 
 
@@ -77,7 +77,7 @@ struct make_from_tag_c_impl<list_c_tag<IntType>,void,Items...> :
  * @brief Helper for `make_from_tag_c`.
  */
 template <value_type_of<string_tag>... Items>
-struct make_from_tag_c_impl<string_tag,void,Items...> :
+struct make_from_tag_c_impl<string_tag, void, Items...> :
 	string<Items...>
 {};
 
@@ -95,8 +95,8 @@ struct make_from_tag_c_impl<string_tag,void,Items...> :
  * @param Items... The elements that will be added to the desired type, which
  *                 must have the same type as required from `TypeTag`.
  */
-template <typename TypeTag,value_type_of<TypeTag>... Items>
-using make_from_tag_c = typename make_from_tag_c_impl<TypeTag,void,Items...>::type;
+template <typename TypeTag, value_type_of<TypeTag>... Items>
+using make_from_tag_c = typename make_from_tag_c_impl<TypeTag, void, Items...>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

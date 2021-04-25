@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -29,13 +29,13 @@ namespace cynodelic { namespace mulinum {
  * Counts the arity (i.e. the number of arguments) of a metafunction/template
  * type, returning a @ref size_c.
  *
- * NOTE: Since the instances of the underlying counting function are harcoded,
+ * @note Since the instances of the underlying counting function are harcoded,
  * it supports template types up to 200 arguments.
  *
  * @param MetaFn The metafunction.
  */
 template <template <typename...> class MetaFn>
-struct arity_of : integer_c<std::size_t,detail::get_template_arity<MetaFn>()>
+struct arity_of : integer_c<std::size_t, detail::get_template_arity<MetaFn>()>
 {};
 
 

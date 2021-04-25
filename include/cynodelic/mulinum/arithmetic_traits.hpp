@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -36,15 +36,15 @@ struct is_arithmetic_type_impl : false_ {};
 /**
  * @brief Helper for `is_arithmetic_type`.
  */
-template <typename IntType,IntType Value>
-struct is_arithmetic_type_impl<integer_c<IntType,Value>> : true_ {};
+template <typename IntType, IntType Value>
+struct is_arithmetic_type_impl<integer_c<IntType, Value>> : true_ {};
 
 
 /**
  * @brief Helper for `is_arithmetic_type`.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-struct is_arithmetic_type_impl<rational<Num,Den>> : true_ {};
+template <std::intmax_t Num, std::intmax_t Den>
+struct is_arithmetic_type_impl<rational<Num, Den>> : true_ {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 
@@ -71,8 +71,8 @@ struct is_integer_c_impl : false_ {};
 /**
  * @brief Helper for `is_integer_c`.
  */
-template <typename IntType,IntType Value>
-struct is_integer_c_impl<integer_c<IntType,Value>> : true_ {};
+template <typename IntType, IntType Value>
+struct is_integer_c_impl<integer_c<IntType, Value>> : true_ {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 
@@ -99,8 +99,8 @@ struct is_rational_impl : false_ {};
 /**
  * @brief Helper for @ref is_rational.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-struct is_rational_impl<rational<Num,Den>> : true_ {};
+template <std::intmax_t Num, std::intmax_t Den>
+struct is_rational_impl<rational<Num, Den>> : true_ {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 

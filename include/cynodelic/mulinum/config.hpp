@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -23,7 +23,7 @@
 
 #define CYNODELIC_MULINUM_VERSION_MAJOR 1 /**< @brief Major version of this library. */
 #define CYNODELIC_MULINUM_VERSION_MINOR 0 /**< @brief Minor version of this library. */
-#define CYNODELIC_MULINUM_VERSION_PATCH 0 /**< @brief Patch version of this library. */
+#define CYNODELIC_MULINUM_VERSION_PATCH 1 /**< @brief Patch version of this library. */
 
 
 /// @brief The version of this library.
@@ -55,7 +55,7 @@
  * necessary headers.
  */
 #define CYNODELIC_MULINUM_MAX_METAFUNCTION_OBJ_ARITY 10
-#endif // CYNODELIC_MULINUM_MAX_METAFUNCTION_OBJ_ARITY)
+#endif // CYNODELIC_MULINUM_MAX_METAFUNCTION_OBJ_ARITY
 
 
 #endif // CYNODELIC_MULINUM_CONFIG_HPP

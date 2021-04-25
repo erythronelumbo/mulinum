@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -38,13 +38,13 @@ struct sub_impl {};
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR
+	IntType ValueL, IntType ValueR
 >
 struct sub_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>
 > :
-	integer_c<IntType,ValueL - ValueR>
+	integer_c<IntType, ValueL - ValueR>
 {};
 
 
@@ -53,15 +53,15 @@ struct sub_impl<
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR,
+	IntType ValueL, IntType ValueR,
 	typename... Others
 	>
 struct sub_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>,
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>,
 	Others...
 > :
-	sub_impl<integer_c<IntType,ValueL - ValueR>,Others...>
+	sub_impl<integer_c<IntType, ValueL - ValueR>, Others...>
 {};
 
 
@@ -69,14 +69,14 @@ struct sub_impl<
  * @brief Helper for `sub`.
  */
 template <
-	std::intmax_t LhsNum,std::intmax_t LhsDen,
-	std::intmax_t RhsNum,std::intmax_t RhsDen
+	std::intmax_t LhsNum, std::intmax_t LhsDen,
+	std::intmax_t RhsNum, std::intmax_t RhsDen
 >
-struct sub_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
+struct sub_impl<rational<LhsNum, LhsDen>, rational<RhsNum, RhsDen>> :
 	simplified_form<
 		rational<
-			rational<LhsNum,LhsDen>::num*rational<RhsNum,RhsDen>::den - rational<RhsNum,RhsDen>::num*rational<LhsNum,LhsDen>::den,
-			rational<LhsNum,LhsDen>::den*rational<RhsNum,RhsDen>::den
+			rational<LhsNum, LhsDen>::num*rational<RhsNum, RhsDen>::den - rational<RhsNum, RhsDen>::num*rational<LhsNum, LhsDen>::den,
+			rational<LhsNum, LhsDen>::den*rational<RhsNum, RhsDen>::den
 		>
 	>
 {};
@@ -86,16 +86,16 @@ struct sub_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
  * @brief Helper for `sub`.
  */
 template <
-	std::intmax_t LhsNum,std::intmax_t LhsDen,
-	std::intmax_t RhsNum,std::intmax_t RhsDen,
+	std::intmax_t LhsNum, std::intmax_t LhsDen,
+	std::intmax_t RhsNum, std::intmax_t RhsDen,
 	typename... Others
 >
-struct sub_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>,Others...> :
+struct sub_impl<rational<LhsNum, LhsDen>, rational<RhsNum, RhsDen>, Others...> :
 	sub_impl<
 		simplified_form<
 			rational<
-				rational<LhsNum,LhsDen>::num*rational<RhsNum,RhsDen>::den - rational<RhsNum,RhsDen>::num*rational<LhsNum,LhsDen>::den,
-				rational<LhsNum,LhsDen>::den*rational<RhsNum,RhsDen>::den
+				rational<LhsNum, LhsDen>::num*rational<RhsNum, RhsDen>::den - rational<RhsNum, RhsDen>::num*rational<LhsNum, LhsDen>::den,
+				rational<LhsNum, LhsDen>::den*rational<RhsNum, RhsDen>::den
 			>
 		>,
 		Others...
@@ -107,11 +107,11 @@ struct sub_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>,Others...> :
 
 /**
  * @ingroup arithmeticops
- * @brief Substraction.
+ * @brief Subtraction.
  *
- * Performs substraction of arithmetic types of the same type.
+ * Performs subtraction of at least two arithmetic types of the same type.
  *
- * @param ArithmeticTypes... All the types.
+ * @param ArithmeticTypes... Arithmetic types to be subtracted.
  */
 template <typename... ArithmeticTypes>
 using sub = typename sub_impl<ArithmeticTypes...>::type;

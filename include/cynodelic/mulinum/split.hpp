@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,15 +34,15 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `split`.
  */
-template <typename,typename,typename,typename>
+template <typename, typename, typename, typename>
 class split_impl {};
 
 
 /**
  * @brief Helper for `split`.
  */
-template <char... Chars,char Delim,typename TypeContainerTag>
-class split_impl<string<Chars...>,integer_c<char,Delim>,TypeContainerTag,true_>
+template <char... Chars, char Delim, typename TypeContainerTag>
+class split_impl<string<Chars...>, integer_c<char, Delim>, TypeContainerTag, true_>
 {
 	private:
 		// Remove front delimiters, reverse, remove "front" delimiters and reverse again
@@ -83,8 +83,8 @@ class split_impl<string<Chars...>,integer_c<char,Delim>,TypeContainerTag,true_>
 /**
  * @brief Helper for `split`.
  */
-template <char... Chars,char Delim,typename TypeContainerTag>
-class split_impl<string<Chars...>,integer_c<char,Delim>,TypeContainerTag,false_>
+template <char... Chars, char Delim, typename TypeContainerTag>
+class split_impl<string<Chars...>, integer_c<char, Delim>, TypeContainerTag, false_>
 {
 	public:
 		using type = typename detail::splitter<
@@ -114,8 +114,8 @@ class split_impl<string<Chars...>,integer_c<char,Delim>,TypeContainerTag,false_>
  * @param ByMultipleDelims Split regardless of the ammount of delimiters
  *                         (@ref true_ or @ref false_, default: @ref false_).
  */
-template <typename StringT,typename Delim,typename TypeContainerTag,typename ByMultipleDelims = false_>
-using split = typename split_impl<StringT,Delim,TypeContainerTag,ByMultipleDelims>::type;
+template <typename StringT, typename Delim, typename TypeContainerTag, typename ByMultipleDelims = false_>
+using split = typename split_impl<StringT, Delim, TypeContainerTag, ByMultipleDelims>::type;
 
 
 /**
@@ -130,8 +130,8 @@ using split = typename split_impl<StringT,Delim,TypeContainerTag,ByMultipleDelim
  * @param ByMultipleDelims Split regardless of the ammount of delimiters
  *                         (default : `false`).
  */
-template <typename StringT,char Delim,typename TypeContainerTag,bool ByMultipleDelims = false>
-using split_c = typename split_impl<StringT,char_c<Delim>,TypeContainerTag,bool_c<ByMultipleDelims>>::type;
+template <typename StringT, char Delim, typename TypeContainerTag, bool ByMultipleDelims = false>
+using split_c = typename split_impl<StringT, char_c<Delim>, TypeContainerTag, bool_c<ByMultipleDelims>>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

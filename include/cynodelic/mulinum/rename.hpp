@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -27,7 +27,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `rename`.
  */
-template <template <typename...> class,typename>
+template <template <typename...> class, typename>
 struct rename_impl {};
 
 
@@ -39,7 +39,7 @@ template <
 	template <typename...> class InContainer,
 	typename... Items
 >
-struct rename_impl<OutContainer,InContainer<Items...>>
+struct rename_impl<OutContainer, InContainer<Items...>>
 {
 	using type = OutContainer<Items...>;
 };
@@ -53,11 +53,11 @@ template <
 	typename Head,
 	typename Tail
 >
-struct rename_impl<OutContainer,list_node<Head,Tail>>
+struct rename_impl<OutContainer, list_node<Head, Tail>>
 {
 	using type = concat<
 		OutContainer<Head>,
-		typename rename_impl<OutContainer,Tail>::type
+		typename rename_impl<OutContainer, Tail>::type
 	>;
 };
 
@@ -69,7 +69,7 @@ template <
 	template <typename...> class OutContainer,
 	typename Head
 >
-struct rename_impl<OutContainer,list_node<Head,null_type>>
+struct rename_impl<OutContainer, list_node<Head, null_type>>
 {
 	using type = OutContainer<Head>;
 };
@@ -87,8 +87,8 @@ struct rename_impl<OutContainer,list_node<Head,null_type>>
  * @param OutContainer The type of the output container.
  * @param InContainer  The container to convert.
  */
-template <template <typename...> class OutContainer,typename InContainer>
-using rename = typename rename_impl<OutContainer,InContainer>::type;
+template <template <typename...> class OutContainer, typename InContainer>
+using rename = typename rename_impl<OutContainer, InContainer>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

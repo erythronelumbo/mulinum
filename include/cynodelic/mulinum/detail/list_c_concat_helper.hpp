@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -25,7 +25,7 @@ namespace detail
 	/**
 	 * @brief Helper for @ref concat.
 	 */
-	 template <typename,typename>
+	 template <typename, typename>
 	struct list_c_concat_helper;
 
 	
@@ -34,12 +34,12 @@ namespace detail
 	 */
 	template <
 		typename IntType,
-		IntType LhsHead,typename LhsTail,
-		IntType RhsHead,typename RhsTail
+		IntType LhsHead, typename LhsTail,
+		IntType RhsHead, typename RhsTail
 	>
 	struct list_c_concat_helper<
-		list_node_c<IntType,LhsHead,LhsTail>,
-		list_node_c<IntType,RhsHead,RhsTail>
+		list_node_c<IntType, LhsHead, LhsTail>,
+		list_node_c<IntType, RhsHead, RhsTail>
 	>
 	{
 		using type = list_node_c<
@@ -47,7 +47,7 @@ namespace detail
 			LhsHead,
 			typename list_c_concat_helper<
 				LhsTail,
-				list_node_c<IntType,RhsHead,RhsTail>
+				list_node_c<IntType, RhsHead, RhsTail>
 			>::type
 		>;
 	};
@@ -59,17 +59,17 @@ namespace detail
 	template <
 		typename IntType,
 		IntType  LhsHead,
-		IntType  RhsHead,typename RhsTail
+		IntType  RhsHead, typename RhsTail
 	>
 	struct list_c_concat_helper<
-		list_node_c<IntType,LhsHead,null_type>,
-		list_node_c<IntType,RhsHead,RhsTail>
+		list_node_c<IntType, LhsHead, null_type>,
+		list_node_c<IntType, RhsHead, RhsTail>
 	>
 	{
 		using type = list_node_c<
 			IntType,
 			LhsHead,
-			list_node_c<IntType,RhsHead,RhsTail>
+			list_node_c<IntType, RhsHead, RhsTail>
 		>;
 	};
 } // end of "detail" namespace

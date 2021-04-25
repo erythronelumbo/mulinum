@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -24,15 +24,15 @@ namespace detail
 	/**
 	 * @brief Helper for @ref CYNODELIC_MULINUM_STRING.
 	 */
-	template <typename,typename>
+	template <typename, typename>
 	struct str_cat_two;
 
 
 	/**
 	 * @brief Helper for @ref CYNODELIC_MULINUM_STRING.
 	 */
-	template <char... CharsL,char... CharsR>
-	struct str_cat_two<string<CharsL...>,string<CharsR...>> : string<CharsL...,CharsR...> {};
+	template <char... CharsL, char... CharsR>
+	struct str_cat_two<string<CharsL...>, string<CharsR...>> : string<CharsL..., CharsR...> {};
 
 
 	/**
@@ -45,8 +45,8 @@ namespace detail
 	/**
 	 * @brief Helper for @ref remove_zeroes.
 	 */
-	template <char First,char... Others>
-	struct remove_zeroes_impl<string<First,Others...>>
+	template <char First, char... Others>
+	struct remove_zeroes_impl<string<First, Others...>>
 	{
 
 		using type = if_<

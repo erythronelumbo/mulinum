@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -37,8 +37,8 @@ struct reverse_impl {};
 /**
  * @brief Helper for `reverse`.
  */
-template <char First,char... Others>
-struct reverse_impl<string<First,Others...>>
+template <char First, char... Others>
+struct reverse_impl<string<First, Others...>>
 {
 	using type = concat<
 		typename reverse_impl<string<Others...>>::type,
@@ -65,11 +65,11 @@ template <
 	IntType    First,
 	IntType... Others
 >
-struct reverse_impl<vector_c<IntType,First,Others...>>
+struct reverse_impl<vector_c<IntType, First, Others...>>
 {
 	using type = concat<
-		typename reverse_impl<vector_c<IntType,Others...>>::type,
-		vector_c<IntType,First>
+		typename reverse_impl<vector_c<IntType, Others...>>::type,
+		vector_c<IntType, First>
 	>;
 };
 
@@ -81,9 +81,9 @@ template <
 	typename IntType,
 	IntType  Last
 >
-struct reverse_impl<vector_c<IntType,Last>>
+struct reverse_impl<vector_c<IntType, Last>>
 {
-	using type = vector_c<IntType,Last>;
+	using type = vector_c<IntType, Last>;
 };
 
 
@@ -95,11 +95,11 @@ template <
 	IntType  First,
 	typename Tail
 >
-struct reverse_impl<list_node_c<IntType,First,Tail>>
+struct reverse_impl<list_node_c<IntType, First, Tail>>
 {
 	using type = concat<
 		typename reverse_impl<Tail>::type,
-		list_node_c<IntType,First,null_type>
+		list_node_c<IntType, First, null_type>
 	>;
 };
 
@@ -111,9 +111,9 @@ template <
 	typename IntType,
 	IntType  Last
 >
-struct reverse_impl<list_node_c<IntType,Last,null_type>>
+struct reverse_impl<list_node_c<IntType, Last, null_type>>
 {
-	using type = list_node_c<IntType,Last,null_type>;
+	using type = list_node_c<IntType, Last, null_type>;
 };
 
 
@@ -124,7 +124,7 @@ template <
 	typename    First,
 	typename... Others
 >
-struct reverse_impl<vector<First,Others...>>
+struct reverse_impl<vector<First, Others...>>
 {
 	using type = concat<
 		typename reverse_impl<vector<Others...>>::type,
@@ -146,12 +146,12 @@ struct reverse_impl<vector<Last>>
 /**
  * @brief Helper for `reverse`.
  */
-template <typename First,typename Tail>
-struct reverse_impl<list_node<First,Tail>>
+template <typename First, typename Tail>
+struct reverse_impl<list_node<First, Tail>>
 {
 	using type = concat<
 		typename reverse_impl<Tail>::type,
-		list_node<First,null_type>
+		list_node<First, null_type>
 	>;
 };
 
@@ -160,9 +160,9 @@ struct reverse_impl<list_node<First,Tail>>
  * @brief Helper for `reverse`.
  */
 template <typename Last>
-struct reverse_impl<list_node<Last,null_type>>
+struct reverse_impl<list_node<Last, null_type>>
 {
-	using type = list_node<Last,null_type>;
+	using type = list_node<Last, null_type>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -174,7 +174,7 @@ struct reverse_impl<list_node<Last,null_type>>
  *
  * Reverses all the elements of a container.
  *
- * @param Container The container.
+ * @param Container Any container.
  */
 template <typename Container>
 using reverse = typename reverse_impl<Container>::type;

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -25,17 +25,17 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `apply`.
  */
-template <template <typename...> class,typename>
+template <template <typename...> class, typename>
 struct apply_impl {};
 
 
 /**
  * @brief Helper for `apply`.
  */
-template <template <typename...> class MetaFn,typename FirstArg,typename... Others>
-struct apply_impl<MetaFn,vector<FirstArg,Others...>>
+template <template <typename...> class MetaFn, typename FirstArg, typename... Others>
+struct apply_impl<MetaFn, vector<FirstArg, Others...>>
 {
-	using type = MetaFn<FirstArg,Others...>;
+	using type = MetaFn<FirstArg, Others...>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -50,8 +50,8 @@ struct apply_impl<MetaFn,vector<FirstArg,Others...>>
  * @param MetaFn     The metafunction.
  * @param ArgsVector A @ref vector containing the arguments for `MetaFn`.
  */
-template <template <typename...> class MetaFn,typename ArgsVector>
-using apply = typename apply_impl<MetaFn,ArgsVector>::type;
+template <template <typename...> class MetaFn, typename ArgsVector>
+using apply = typename apply_impl<MetaFn, ArgsVector>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -35,26 +35,26 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `insert`.
  */
-template <typename,typename,typename,std::size_t>
+template <typename, typename, typename, std::size_t>
 struct insert_impl {};
 
 
 /**
  * @brief Helper for `insert`.
  */
-template <typename First,typename... Others,typename Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<vector<First,Others...>,Item,integer_c<std::size_t,Idx>,Count>
+template <typename First, typename... Others, typename Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<vector<First, Others...>, Item, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
-			vector<Item,First>,
+			vector<Item, First>,
 			vector<First>
 		>,
 		typename insert_impl<
 			vector<Others...>,
 			Item,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -64,8 +64,8 @@ struct insert_impl<vector<First,Others...>,Item,integer_c<std::size_t,Idx>,Count
 /**
  * @brief Helper for `insert`.
  */
-template <typename Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<vector<>,Item,integer_c<std::size_t,Idx>,Count>
+template <typename Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<vector<>, Item, integer_c<std::size_t, Idx>, Count>
 {
 	using type = if_<
 		(Count == Idx),
@@ -78,19 +78,19 @@ struct insert_impl<vector<>,Item,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `insert`.
  */
-template <typename Head,typename Tail,typename Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<list_node<Head,Tail>,Item,integer_c<std::size_t,Idx>,Count>
+template <typename Head, typename Tail, typename Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<list_node<Head, Tail>, Item, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
-			list_node<Item,list_node<Head,null_type>>,
-			list_node<Head,null_type>
+			list_node<Item, list_node<Head, null_type>>,
+			list_node<Head, null_type>
 		>,
 		typename insert_impl<
 			Tail,
 			Item,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -100,12 +100,12 @@ struct insert_impl<list_node<Head,Tail>,Item,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `insert`.
  */
-template <typename Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<null_type,Item,integer_c<std::size_t,Idx>,Count>
+template <typename Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<null_type, Item, integer_c<std::size_t, Idx>, Count>
 {
 	using type = if_<
 		(Count == Idx),
-		list_node<Item,null_type>,
+		list_node<Item, null_type>,
 		null_type
 	>;
 };
@@ -114,19 +114,19 @@ struct insert_impl<null_type,Item,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `insert`.
  */
-template <typename IntType,IntType First,IntType... Others,IntType Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<vector_c<IntType,First,Others...>,integer_c<IntType,Item>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType First, IntType... Others, IntType Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<vector_c<IntType, First, Others...>, integer_c<IntType, Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
-			vector_c<IntType,Item,First>,
-			vector_c<IntType,First>
+			vector_c<IntType, Item, First>,
+			vector_c<IntType, First>
 		>,
 		typename insert_impl<
-			vector_c<IntType,Others...>,
-			integer_c<IntType,Item>,
-			integer_c<std::size_t,Idx>,
+			vector_c<IntType, Others...>,
+			integer_c<IntType, Item>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -136,12 +136,12 @@ struct insert_impl<vector_c<IntType,First,Others...>,integer_c<IntType,Item>,int
 /**
  * @brief Helper for `insert`.
  */
-template <typename IntType,IntType Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<vector_c<IntType>,integer_c<IntType,Item>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<vector_c<IntType>, integer_c<IntType, Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = if_<
 		(Count == Idx),
-		vector_c<IntType,Item>,
+		vector_c<IntType, Item>,
 		vector_c<IntType>
 	>;
 };
@@ -150,19 +150,19 @@ struct insert_impl<vector_c<IntType>,integer_c<IntType,Item>,integer_c<std::size
 /**
  * @brief Helper for `insert`.
  */
-template <typename IntType,IntType Head,typename Tail,IntType Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<list_node_c<IntType,Head,Tail>,integer_c<IntType,Item>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType Head, typename Tail, IntType Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<list_node_c<IntType, Head, Tail>, integer_c<IntType, Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
-			list_node_c<IntType,Item,list_node_c<IntType,Head,null_type>>,
-			list_node_c<IntType,Head,null_type>
+			list_node_c<IntType, Item, list_node_c<IntType, Head, null_type>>,
+			list_node_c<IntType, Head, null_type>
 		>,
 		typename insert_impl<
 			Tail,
-			integer_c<IntType,Item>,
-			integer_c<std::size_t,Idx>,
+			integer_c<IntType, Item>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -172,12 +172,12 @@ struct insert_impl<list_node_c<IntType,Head,Tail>,integer_c<IntType,Item>,intege
 /**
  * @brief Helper for `insert`.
  */
-template <typename IntType,IntType Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<null_type,integer_c<IntType,Item>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<null_type, integer_c<IntType, Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = if_<
 		(Count == Idx),
-		list_node_c<IntType,Item,null_type>,
+		list_node_c<IntType, Item, null_type>,
 		null_type
 	>;
 };
@@ -186,19 +186,19 @@ struct insert_impl<null_type,integer_c<IntType,Item>,integer_c<std::size_t,Idx>,
 /**
  * @brief Helper for `insert`.
  */
-template <char First,char... Others,char Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<string<First,Others...>,char_c<Item>,integer_c<std::size_t,Idx>,Count>
+template <char First, char... Others, char Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<string<First, Others...>, char_c<Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
-			string<Item,First>,
+			string<Item, First>,
 			string<First>
 		>,
 		typename insert_impl<
 			string<Others...>,
 			char_c<Item>,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -208,8 +208,8 @@ struct insert_impl<string<First,Others...>,char_c<Item>,integer_c<std::size_t,Id
 /**
  * @brief Helper for `insert`.
  */
-template <char Item,std::size_t Idx,std::size_t Count>
-struct insert_impl<string<>,char_c<Item>,integer_c<std::size_t,Idx>,Count>
+template <char Item, std::size_t Idx, std::size_t Count>
+struct insert_impl<string<>, char_c<Item>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = if_<
 		(Count == Idx),
@@ -232,8 +232,8 @@ struct insert_impl<string<>,char_c<Item>,integer_c<std::size_t,Idx>,Count>
  * @param Idx       The position where the element to insert is (a
  *                  @ref size_c).
  */
-template <typename Container,typename Item,typename Idx>
-using insert = typename insert_impl<Container,Item,Idx,0>::type;
+template <typename Container, typename Item, typename Idx>
+using insert = typename insert_impl<Container, Item, Idx, 0>::type;
 
 
 /**
@@ -246,8 +246,8 @@ using insert = typename insert_impl<Container,Item,Idx,0>::type;
  * @param Item      The item to insert.
  * @param Idx       The position where the element to insert is.
  */
-template <typename Container,typename Item,std::size_t Idx>
-using insert_c = typename insert_impl<Container,Item,size_c<Idx>,0>::type;
+template <typename Container, typename Item, std::size_t Idx>
+using insert_c = typename insert_impl<Container, Item, size_c<Idx>, 0>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

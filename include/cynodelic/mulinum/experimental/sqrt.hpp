@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -35,27 +35,27 @@ namespace experimental
 	/**
 	 * @brief Helper for `sqrt`.
 	 */
-	template <typename,typename>
+	template <typename, typename>
 	struct sqrt_impl {};
 
 
 	/**
 	 * @brief Helper for `sqrt`.
 	 */
-	template <typename IntType,IntType N,std::size_t Iterations>
-	struct sqrt_impl<integer_c<IntType,N>,integer_c<std::size_t,Iterations>> :
-		sqrt_c<static_cast<std::intmax_t>(N),Iterations>
+	template <typename IntType, IntType N, std::size_t Iterations>
+	struct sqrt_impl<integer_c<IntType, N>, integer_c<std::size_t, Iterations>> :
+		sqrt_c<static_cast<std::intmax_t>(N), Iterations>
 	{};
 
 
 	/**
 	 * @brief Helper for `sqrt`.
 	 */
-	template <std::intmax_t Num,std::intmax_t Den,std::size_t Iterations>
-	struct sqrt_impl<rational<Num,Den>,integer_c<std::size_t,Iterations>> :
+	template <std::intmax_t Num, std::intmax_t Den, std::size_t Iterations>
+	struct sqrt_impl<rational<Num, Den>, integer_c<std::size_t, Iterations>> :
 		div<
-			sqrt_c<rational<Num,Den>::num,Iterations>,
-			sqrt_c<rational<Num,Den>::den,Iterations>
+			sqrt_c<rational<Num, Den>::num, Iterations>,
+			sqrt_c<rational<Num, Den>::den, Iterations>
 		>
 	{};
 
@@ -71,8 +71,8 @@ namespace experimental
 	 * @param ArithmeticType An arithmetic type.
 	 * @param Iterations     Number of iterations (a @ref size_c).
 	 */
-	template <typename ArithmeticType,typename Iterations>
-	using sqrt = typename sqrt_impl<ArithmeticType,Iterations>::type;
+	template <typename ArithmeticType, typename Iterations>
+	using sqrt = typename sqrt_impl<ArithmeticType, Iterations>::type;
 } // end of "experimental" namespace
 
 }} // end of "cynodelic::mulinum" namespace

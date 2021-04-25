@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -36,11 +36,11 @@ struct simplified_form_impl {};
 /**
  * @brief Helper for `simplified_form`.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-struct simplified_form_impl<rational<Num,Den>> :
+template <std::intmax_t Num, std::intmax_t Den>
+struct simplified_form_impl<rational<Num, Den>> :
 	rational<
-		detail::simplify_num(Num,Den),
-		detail::simplify_den(Num,Den)
+		detail::simplify_num(Num, Den),
+		detail::simplify_den(Num, Den)
 	>
 {};
 
@@ -52,7 +52,7 @@ struct simplified_form_impl<rational<Num,Den>> :
  * @brief Simplified form of a `rational`.
  *
  * Turns a `RationalT` (a @ref rational) into its simplified form (e.g.
- * `simplified_form<rational<200,400>> becomes rational<1,2>`).
+ * `simplified_form<rational<200, 400>>` becomes `rational<1, 2>`).
  *
  * @param RationalT A @ref rational.
  */

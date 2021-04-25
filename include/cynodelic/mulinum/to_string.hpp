@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -36,18 +36,18 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `to_string`.
  */
-template <typename,typename = void>
+template <typename, typename = void>
 class to_string_impl {};
 
 
 /**
  * @brief Helper for `to_string`.
  */
-template <typename IntType,IntType Value>
-class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_unsigned<IntType>::value>>
+template <typename IntType, IntType Value>
+class to_string_impl<integer_c<IntType, Value>, detail::enable_if<detail::is_unsigned<IntType>::value>>
 {
 	private:
-		template <std::uintmax_t Value_,bool = (Value_ == 0)>
+		template <std::uintmax_t Value_, bool = (Value_ == 0)>
 		struct itos_helper
 		{
 			using type = concat<
@@ -57,7 +57,7 @@ class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_unsig
 		};
 
 		template <std::uintmax_t Value_>
-		struct itos_helper<Value_,true>
+		struct itos_helper<Value_, true>
 		{
 			using type = string<>;
 		};
@@ -73,11 +73,11 @@ class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_unsig
 /**
  * @brief Helper for `to_string`.
  */
-template <typename IntType,IntType Value>
-class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_signed<IntType>::value>>
+template <typename IntType, IntType Value>
+class to_string_impl<integer_c<IntType, Value>, detail::enable_if<detail::is_signed<IntType>::value>>
 {
 	private:
-		template <std::intmax_t Value_,bool = (Value_ == 0)>
+		template <std::intmax_t Value_, bool = (Value_ == 0)>
 		struct itos_helper
 		{
 			using type = concat<
@@ -87,7 +87,7 @@ class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_signe
 		};
 
 		template <std::intmax_t Value_>
-		struct itos_helper<Value_,true>
+		struct itos_helper<Value_, true>
 		{
 			using type = string<>;
 		};
@@ -96,7 +96,7 @@ class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_signe
 			Value == 0,
 			string<'0'>,
 			concat<
-				if_<(Value < 0),string<'-'>,string<>>,
+				if_<(Value < 0), string<'-'>, string<>>,
 				typename itos_helper<detail::iabs(static_cast<std::intmax_t>(Value))>::type
 			>
 		>;
@@ -106,11 +106,11 @@ class to_string_impl<integer_c<IntType,Value>,detail::enable_if<detail::is_signe
 /**
  * @brief Helper for `to_string`.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-class to_string_impl<rational<Num,Den>,void>
+template <std::intmax_t Num, std::intmax_t Den>
+class to_string_impl<rational<Num, Den>, void>
 {
 	private:
-		template <std::intmax_t Value_,bool = (Value_ == 0)>
+		template <std::intmax_t Value_, bool = (Value_ == 0)>
 		struct itos_helper
 		{
 			using type = concat<
@@ -120,30 +120,30 @@ class to_string_impl<rational<Num,Den>,void>
 		};
 
 		template <std::intmax_t Value_>
-		struct itos_helper<Value_,true>
+		struct itos_helper<Value_, true>
 		{
 			using type = string<>;
 		};
 
 		using num_str = if_<
-			rational<Num,Den>::num == 0,
+			rational<Num, Den>::num == 0,
 			string<'0'>,
 			concat<
-				if_<(rational<Num,Den>::num < 0),string<'-'>,string<>>,
-				typename itos_helper<detail::iabs(static_cast<std::intmax_t>(rational<Num,Den>::num))>::type
+				if_<(rational<Num, Den>::num < 0), string<'-'>, string<>>,
+				typename itos_helper<detail::iabs(static_cast<std::intmax_t>(rational<Num, Den>::num))>::type
 			>
 		>;
 
 		using den_str = if_<
-			rational<Num,Den>::den == 0,
+			rational<Num, Den>::den == 0,
 			string<'0'>,
 			concat<
-				if_<(rational<Num,Den>::den < 0),string<'-'>,string<>>,
-				typename itos_helper<static_cast<std::intmax_t>(rational<Num,Den>::den)>::type
+				if_<(rational<Num, Den>::den < 0), string<'-'>, string<>>,
+				typename itos_helper<static_cast<std::intmax_t>(rational<Num, Den>::den)>::type
 			>
 		>;
 	public:
-		using type = concat<num_str,string<'/'>,den_str>;
+		using type = concat<num_str, string<'/'>, den_str>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -155,7 +155,7 @@ class to_string_impl<rational<Num,Den>,void>
  *
  * Converts an arithmetic type (@ref integer_c or @ref rational) to
  * a @ref string.
- * Also, it is allowed to pass a @ref string.
+ * Also, it is allowed to pass a @ref string, resulting in the same string.
  *
  * @param ArithmeticType The arithmetic type.
  */

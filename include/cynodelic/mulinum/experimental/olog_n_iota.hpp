@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,7 +33,7 @@ namespace experimental
 	/**
 	 * @brief Helper for `olog_n_iota`.
 	 */
-	template <typename,typename,typename,typename>
+	template <typename, typename, typename, typename>
 	struct olog_n_iota_impl {};
 
 	
@@ -48,14 +48,14 @@ namespace experimental
 	>
 	struct olog_n_iota_impl<
 		IntContainerTag,
-		integer_c<value_type_of<IntContainerTag>,Start>,
+		integer_c<value_type_of<IntContainerTag>, Start>,
 		size_c<Num>,
-		integer_c<value_type_of<IntContainerTag>,Increment>
+		integer_c<value_type_of<IntContainerTag>, Increment>
 	>
 	{
 		using type = typename detail::iota_transf<
-			detail::unit_iota<IntContainerTag,0,(Num - 1)>,
-			Increment,Start
+			detail::unit_iota<IntContainerTag, 0, (Num - 1)>,
+			Increment, Start
 		>::type;
 	};
 
@@ -82,9 +82,9 @@ namespace experimental
 		typename IntContainerTag,
 		typename Start,
 		typename Num,
-		typename Increment = integer_c<value_type_of<IntContainerTag>,1>
+		typename Increment = integer_c<value_type_of<IntContainerTag>, 1>
 	>
-	using olog_n_iota = typename olog_n_iota_impl<IntContainerTag,Start,Num,Increment>::type;
+	using olog_n_iota = typename olog_n_iota_impl<IntContainerTag, Start, Num, Increment>::type;
 	
 
 	/**
@@ -107,9 +107,9 @@ namespace experimental
 	>
 	using olog_n_iota_c = typename olog_n_iota_impl<
 		IntContainerTag,
-		integer_c<value_type_of<IntContainerTag>,Start>,
+		integer_c<value_type_of<IntContainerTag>, Start>,
 		size_c<Num>,
-		integer_c<value_type_of<IntContainerTag>,Increment>
+		integer_c<value_type_of<IntContainerTag>, Increment>
 	>::type;
 } // end of "experimental" namespace
 

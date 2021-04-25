@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -31,7 +31,7 @@ namespace cynodelic { namespace mulinum {
  * Checks if a type `T` is a @ref type_container_tag.
  */
 template <typename T>
-using is_type_container_tag = equals<typename T::parent_tag,type_container_tag>;
+using is_type_container_tag = equals<typename T::parent_tag, type_container_tag>;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -58,7 +58,8 @@ class is_integer_container_tag_impl
 /**
  * @brief Integer container tag checker.
  *
- * Checks if a type `T` is an @ref integer_container_tag.
+ * Checks if a type `T` is an @ref integer_container_tag, resulting in
+ * @ref true_ or @ref false_ .
  */
 template <typename T>
 using is_integer_container_tag = typename is_integer_container_tag_impl<T>::type;

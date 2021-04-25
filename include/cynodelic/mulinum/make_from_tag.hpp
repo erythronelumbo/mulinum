@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -28,7 +28,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `make_from_tag`.
  */
-template <typename,typename...>
+template <typename, typename...>
 struct make_from_tag_impl {};
 
 
@@ -36,7 +36,7 @@ struct make_from_tag_impl {};
  * @brief Helper for `make_from_tag`.
  */
 template <typename... Items>
-struct make_from_tag_impl<vector_tag,Items...> :
+struct make_from_tag_impl<vector_tag, Items...> :
 	vector<Items...>
 {};
 
@@ -45,7 +45,7 @@ struct make_from_tag_impl<vector_tag,Items...> :
  * @brief Helper for `make_from_tag`.
  */
 template <typename... Items>
-struct make_from_tag_impl<list_tag,Items...> :
+struct make_from_tag_impl<list_tag, Items...> :
 	list<Items...>
 {};
 
@@ -61,8 +61,8 @@ struct make_from_tag_impl<list_tag,Items...> :
  * @param TypeContainerTag The tag.
  * @param Items...         The elements that will be added to the container.
  */
-template <typename TypeContainerTag,typename... Items>
-using make_from_tag = typename make_from_tag_impl<TypeContainerTag,Items...>::type;
+template <typename TypeContainerTag, typename... Items>
+using make_from_tag = typename make_from_tag_impl<TypeContainerTag, Items...>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

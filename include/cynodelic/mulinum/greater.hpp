@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -28,7 +28,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `greater`.
  */
-template <typename Lhs,typename Rhs>
+template <typename Lhs, typename Rhs>
 struct greater_impl {};
 
 
@@ -40,7 +40,7 @@ template <
 	IntType Lhs,
 	IntType Rhs
 >
-struct greater_impl<integer_c<IntType,Lhs>,integer_c<IntType,Rhs>> :
+struct greater_impl<integer_c<IntType, Lhs>, integer_c<IntType, Rhs>> :
 	bool_c<(Lhs > Rhs)>
 {};
 
@@ -49,10 +49,10 @@ struct greater_impl<integer_c<IntType,Lhs>,integer_c<IntType,Rhs>> :
  * @brief Helper for `greater`.
  */
 template <
-	std::intmax_t LhsNum,std::intmax_t LhsDen,
-	std::intmax_t RhsNum,std::intmax_t RhsDen
+	std::intmax_t LhsNum, std::intmax_t LhsDen,
+	std::intmax_t RhsNum, std::intmax_t RhsDen
 >
-struct greater_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
+struct greater_impl<rational<LhsNum, LhsDen>, rational<RhsNum, RhsDen>> :
 	bool_c<(LhsNum*RhsDen > RhsNum*LhsDen)>
 {};
 
@@ -63,10 +63,11 @@ struct greater_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
  * @ingroup comparators
  * @brief "Greater-than" comparator
  *
- * Checks if the value of `Lhs` is greater than the one in `Rhs`.
+ * Checks if the value of `Lhs` is greater than the one in `Rhs`, resulting in
+ * @ref true_ or @ref false_ .
  */
-template <typename Lhs,typename Rhs>
-using greater = typename greater_impl<Lhs,Rhs>::type;
+template <typename Lhs, typename Rhs>
+using greater = typename greater_impl<Lhs, Rhs>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

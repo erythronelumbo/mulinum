@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -25,7 +25,7 @@ namespace detail
 	/**
 	 * @brief Helper for @ref concat.
 	 */
-	template <typename,typename>
+	template <typename, typename>
 	struct list_concat_helper;
 
 	
@@ -33,19 +33,19 @@ namespace detail
 	 * @brief Helper for @ref concat.
 	 */
 	template <
-		typename LhsHead,typename LhsTail,
-		typename RhsHead,typename RhsTail
+		typename LhsHead, typename LhsTail,
+		typename RhsHead, typename RhsTail
 	>
 	struct list_concat_helper<
-		list_node<LhsHead,LhsTail>,
-		list_node<RhsHead,RhsTail>
+		list_node<LhsHead, LhsTail>,
+		list_node<RhsHead, RhsTail>
 	>
 	{
 		using type = list_node<
 			LhsHead,
 			typename list_concat_helper<
 				LhsTail,
-				list_node<RhsHead,RhsTail>
+				list_node<RhsHead, RhsTail>
 			>::type
 		>;
 	};
@@ -54,13 +54,13 @@ namespace detail
 	/**
 	 * @brief Helper for @ref concat.
 	 */
-	template <typename LhsHead,typename RhsHead,typename RhsTail>
+	template <typename LhsHead, typename RhsHead, typename RhsTail>
 	struct list_concat_helper<
-		list_node<LhsHead,null_type>,
-		list_node<RhsHead,RhsTail>
+		list_node<LhsHead, null_type>,
+		list_node<RhsHead, RhsTail>
 	>
 	{
-		using type = list_node<LhsHead,list_node<RhsHead,RhsTail>>;
+		using type = list_node<LhsHead, list_node<RhsHead, RhsTail>>;
 	};
 } // end of "detail" namespace
 

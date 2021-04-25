@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -39,13 +39,13 @@ struct add_impl {};
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR
+	IntType ValueL, IntType ValueR
 >
 struct add_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>
 > :
-	integer_c<IntType,ValueL + ValueR>
+	integer_c<IntType, ValueL + ValueR>
 {};
 
 
@@ -54,15 +54,15 @@ struct add_impl<
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR,
+	IntType ValueL, IntType ValueR,
 	typename... Others
 	>
 struct add_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>,
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>,
 	Others...
 > :
-	add_impl<integer_c<IntType,ValueL + ValueR>,Others...>
+	add_impl<integer_c<IntType, ValueL + ValueR>, Others...>
 {};
 
 
@@ -70,14 +70,14 @@ struct add_impl<
  * @brief Helper for `add`.
  */
 template <
-	std::intmax_t LhsNum,std::intmax_t LhsDen,
-	std::intmax_t RhsNum,std::intmax_t RhsDen
+	std::intmax_t LhsNum, std::intmax_t LhsDen,
+	std::intmax_t RhsNum, std::intmax_t RhsDen
 >
-struct add_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
+struct add_impl<rational<LhsNum, LhsDen>, rational<RhsNum, RhsDen>> :
 	simplified_form<
 		rational<
-			rational<LhsNum,LhsDen>::num*rational<RhsNum,RhsDen>::den + rational<RhsNum,RhsDen>::num*rational<LhsNum,LhsDen>::den,
-			rational<LhsNum,LhsDen>::den*rational<RhsNum,RhsDen>::den
+			rational<LhsNum, LhsDen>::num*rational<RhsNum, RhsDen>::den + rational<RhsNum, RhsDen>::num*rational<LhsNum, LhsDen>::den,
+			rational<LhsNum, LhsDen>::den*rational<RhsNum, RhsDen>::den
 		>
 	>
 {};
@@ -87,16 +87,16 @@ struct add_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>> :
  * @brief Helper for `add`.
  */
 template <
-	std::intmax_t LhsNum,std::intmax_t LhsDen,
-	std::intmax_t RhsNum,std::intmax_t RhsDen,
+	std::intmax_t LhsNum, std::intmax_t LhsDen,
+	std::intmax_t RhsNum, std::intmax_t RhsDen,
 	typename... Others
 >
-struct add_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>,Others...> :
+struct add_impl<rational<LhsNum, LhsDen>, rational<RhsNum, RhsDen>,Others...> :
 	add_impl<
 		simplified_form<
 			rational<
-				rational<LhsNum,LhsDen>::num*rational<RhsNum,RhsDen>::den + rational<RhsNum,RhsDen>::num*rational<LhsNum,LhsDen>::den,
-				rational<LhsNum,LhsDen>::den*rational<RhsNum,RhsDen>::den
+				rational<LhsNum, LhsDen>::num*rational<RhsNum, RhsDen>::den + rational<RhsNum, RhsDen>::num*rational<LhsNum, LhsDen>::den,
+				rational<LhsNum, LhsDen>::den*rational<RhsNum, RhsDen>::den
 			>
 		>,
 		Others...
@@ -110,9 +110,9 @@ struct add_impl<rational<LhsNum,LhsDen>,rational<RhsNum,RhsDen>,Others...> :
  * @ingroup arithmeticops
  * @brief Addition.
  *
- * Performs addition of arithmetic types of the same type.
+ * Performs addition of at least two arithmetic types of the same type.
  *
- * @param ArithmeticTypes... All the types.
+ * @param ArithmeticTypes... Arithmetic types to sum.
  */
 template <typename... ArithmeticTypes>
 using add = typename add_impl<ArithmeticTypes...>::type;

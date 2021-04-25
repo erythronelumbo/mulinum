@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,7 +33,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `lexicographical_compare`.
  */
-template <typename,typename,typename>
+template <typename, typename, typename>
 struct lexicographical_compare_impl {};
 
 
@@ -42,13 +42,13 @@ struct lexicographical_compare_impl {};
  */
 template <
 	typename Comparator,
-	char First1,char... Others1,
-	char First2,char... Others2
+	char First1, char... Others1,
+	char First2, char... Others2
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	string<First1,Others1...>,
-	string<First2,Others2...>
+	string<First1, Others1...>,
+	string<First2, Others2...>
 > : if_<
 	(First1 == First2),
 	typename lexicographical_compare_impl<
@@ -56,7 +56,7 @@ struct lexicographical_compare_impl<
 		string<Others1...>,
 		string<Others2...>
 	>::type,
-	typename Comparator::template apply<char_c<First1>,char_c<First2>>::type
+	typename Comparator::template apply<char_c<First1>, char_c<First2>>::type
 >
 {};
 
@@ -72,7 +72,7 @@ struct lexicographical_compare_impl<
 	Comparator,
 	string<Chars...>,
 	string<>
-> : Comparator::template apply<size_c<sizeof...(Chars)>,size_c<0>>::type
+> : Comparator::template apply<size_c<sizeof...(Chars)>, size_c<0>>::type
 {};
 
 
@@ -87,7 +87,7 @@ struct lexicographical_compare_impl<
 	Comparator,
 	string<>,
 	string<Chars...>
-> : Comparator::template apply<size_c<0>,size_c<sizeof...(Chars)>>::type
+> : Comparator::template apply<size_c<0>, size_c<sizeof...(Chars)>>::type
 {};
 
 
@@ -111,21 +111,21 @@ struct lexicographical_compare_impl<
 template <
 	typename Comparator,
 	typename IntType,
-	IntType  First1,IntType... Others1,
-	IntType  First2,IntType... Others2
+	IntType  First1, IntType... Others1,
+	IntType  First2, IntType... Others2
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	vector_c<IntType,First1,Others1...>,
-	vector_c<IntType,First2,Others2...>
+	vector_c<IntType, First1, Others1...>,
+	vector_c<IntType, First2, Others2...>
 > : if_<
 	(First1 == First2),
 	typename lexicographical_compare_impl<
 		Comparator,
-		vector_c<IntType,Others1...>,
-		vector_c<IntType,Others2...>
+		vector_c<IntType, Others1...>,
+		vector_c<IntType, Others2...>
 	>::type,
-	typename Comparator::template apply<integer_c<IntType,First1>,integer_c<IntType,First2>>::type
+	typename Comparator::template apply<integer_c<IntType, First1>, integer_c<IntType, First2>>::type
 >
 {};
 
@@ -140,9 +140,9 @@ template <
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	vector_c<IntType,Items...>,
+	vector_c<IntType, Items...>,
 	vector_c<IntType>
-> : Comparator::template apply<size_c<sizeof...(Items)>,size_c<0>>::type
+> : Comparator::template apply<size_c<sizeof...(Items)>, size_c<0>>::type
 {};
 
 
@@ -157,8 +157,8 @@ template <
 struct lexicographical_compare_impl<
 	Comparator,
 	vector_c<IntType>,
-	vector_c<IntType,Items...>
-> : Comparator::template apply<size_c<0>,size_c<sizeof...(Items)>>::type
+	vector_c<IntType, Items...>
+> : Comparator::template apply<size_c<0>, size_c<sizeof...(Items)>>::type
 {};
 
 
@@ -183,13 +183,13 @@ struct lexicographical_compare_impl<
 template <
 	typename Comparator,
 	typename IntType,
-	IntType  First1,typename Tail1,
-	IntType  First2,typename Tail2
+	IntType  First1, typename Tail1,
+	IntType  First2, typename Tail2
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	list_node_c<IntType,First1,Tail1>,
-	list_node_c<IntType,First2,Tail2>
+	list_node_c<IntType, First1, Tail1>,
+	list_node_c<IntType, First2, Tail2>
 > : if_<
 	(First1 == First2),
 	typename lexicographical_compare_impl<
@@ -197,7 +197,7 @@ struct lexicographical_compare_impl<
 		Tail1,
 		Tail2
 	>::type,
-	typename Comparator::template apply<integer_c<IntType,First1>,integer_c<IntType,First2>>::type
+	typename Comparator::template apply<integer_c<IntType, First1>, integer_c<IntType, First2>>::type
 >
 {};
 
@@ -213,9 +213,9 @@ template <
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	list_node_c<IntType,First,Tail>,
+	list_node_c<IntType, First, Tail>,
 	null_type
-> : Comparator::template apply<size_c<list_node_c<IntType,First,Tail>::size>,size_c<0>>::type
+> : Comparator::template apply<size_c<list_node_c<IntType, First, Tail>::size>, size_c<0>>::type
 {};
 
 
@@ -231,8 +231,8 @@ template <
 struct lexicographical_compare_impl<
 	Comparator,
 	null_type,
-	list_node_c<IntType,First,Tail>
-> : Comparator::template apply<size_c<0>,size_c<list_node_c<IntType,First,Tail>::size>>::type
+	list_node_c<IntType, First, Tail>
+> : Comparator::template apply<size_c<0>, size_c<list_node_c<IntType, First, Tail>::size>>::type
 {};
 
 
@@ -241,21 +241,21 @@ struct lexicographical_compare_impl<
  */
 template <
 	typename Comparator,
-	typename First1,typename... Others1,
-	typename First2,typename... Others2
+	typename First1, typename... Others1,
+	typename First2, typename... Others2
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	vector<First1,Others1...>,
-	vector<First2,Others2...>
+	vector<First1, Others1...>,
+	vector<First2, Others2...>
 > : if_<
-	equals<First1,First2>::value,
+	equals<First1, First2>::value,
 	typename lexicographical_compare_impl<
 		Comparator,
 		vector<Others1...>,
 		vector<Others2...>
 	>::type,
-	typename Comparator::template apply<First1,First2>::type
+	typename Comparator::template apply<First1, First2>::type
 >
 {};
 
@@ -271,7 +271,7 @@ struct lexicographical_compare_impl<
 	Comparator,
 	vector<Items...>,
 	vector<>
-> : Comparator::template apply<size_c<sizeof...(Items)>,size_c<0>>::type
+> : Comparator::template apply<size_c<sizeof...(Items)>, size_c<0>>::type
 {};
 
 
@@ -286,7 +286,7 @@ struct lexicographical_compare_impl<
 	Comparator,
 	vector<>,
 	vector<Items...>
-> : Comparator::template apply<size_c<0>,size_c<sizeof...(Items)>>::type
+> : Comparator::template apply<size_c<0>, size_c<sizeof...(Items)>>::type
 {};
 
 
@@ -309,21 +309,21 @@ struct lexicographical_compare_impl<
  */
 template <
 	typename Comparator,
-	typename First1,typename Tail1,
-	typename First2,typename Tail2
+	typename First1, typename Tail1,
+	typename First2, typename Tail2
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	list_node<First1,Tail1>,
-	list_node<First2,Tail2>
+	list_node<First1, Tail1>,
+	list_node<First2, Tail2>
 > : if_<
-	equals<First1,First2>::value,
+	equals<First1, First2>::value,
 	typename lexicographical_compare_impl<
 		Comparator,
 		Tail1,
 		Tail2
 	>::type,
-	typename Comparator::template apply<First1,First2>::type
+	typename Comparator::template apply<First1, First2>::type
 >
 {};
 
@@ -338,9 +338,9 @@ template <
 >
 struct lexicographical_compare_impl<
 	Comparator,
-	list_node<First,Tail>,
+	list_node<First, Tail>,
 	null_type
-> : Comparator::template apply<size_c<list_node<First,Tail>::size>,size_c<0>>::type
+> : Comparator::template apply<size_c<list_node<First, Tail>::size>, size_c<0>>::type
 {};
 
 
@@ -355,8 +355,8 @@ template <
 struct lexicographical_compare_impl<
 	Comparator,
 	null_type,
-	list_node<First,Tail>
-> : Comparator::template apply<size_c<0>,size_c<list_node<First,Tail>::size>>::type
+	list_node<First, Tail>
+> : Comparator::template apply<size_c<0>, size_c<list_node<First, Tail>::size>>::type
 {};
 
 
@@ -380,15 +380,15 @@ struct lexicographical_compare_impl<
  * @ingroup containerops
  * @brief Lexicographical comparator.
  *
- * Performs a lexicographical comparision bewueen two containers, based on a
+ * Performs a lexicographical comparision between two containers, based on a
  * given comparator.
  *
  * @param Comparator The comparator (must be a metafunction object).
  * @param Container1 A container.
  * @param Container2 A container.
  */
-template <typename Comparator,typename Container1,typename Container2>
-using lexicographical_compare = typename lexicographical_compare_impl<Comparator,Container1,Container2>::type;
+template <typename Comparator, typename Container1, typename Container2>
+using lexicographical_compare = typename lexicographical_compare_impl<Comparator, Container1, Container2>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

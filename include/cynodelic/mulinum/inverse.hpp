@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,11 +34,11 @@ struct inverse_impl {};
 /**
  * @brief Helper for `inverse`.
  */
-template <std::intmax_t Num,std::intmax_t Den>
-struct inverse_impl<rational<Num,Den>> :
+template <std::intmax_t Num, std::intmax_t Den>
+struct inverse_impl<rational<Num, Den>> :
 	rational<
-		rational<Num,Den>::den,
-		rational<Num,Den>::num
+		rational<Num, Den>::den,
+		rational<Num, Den>::num
 	>
 {};
 
@@ -49,7 +49,7 @@ struct inverse_impl<rational<Num,Den>> :
  * @ingroup arithmeticops
  * @brief Rational inverse.
  *
- * Inverts the numrator and denominator of a fraction.
+ * Inverts the numerator and denominator of a fraction (@ref rational).
  *
  * @param Rational A fraction (@ref rational).
  */

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,11 +30,11 @@ namespace cynodelic { namespace mulinum {
  * A linked list node that contains a type and other nodes (or a
  * @ref null_type as a list end).
  */
-template <typename Item,typename Next = null_type>
+template <typename Item, typename Next = null_type>
 struct list_node
 {
 	/// @brief Reference to itself.
-	using type = list_node<Item,Next>;
+	using type = list_node<Item, Next>;
 
 	/// @brief The list's head.
 	using head = Item;
@@ -49,8 +49,8 @@ struct list_node
 	static constexpr std::size_t size = 1 + tail::size;
 };
 
-template <typename Item,typename Next>
-constexpr std::size_t list_node<Item,Next>::size;
+template <typename Item, typename Next>
+constexpr std::size_t list_node<Item, Next>::size;
 
 
 /**
@@ -60,10 +60,10 @@ constexpr std::size_t list_node<Item,Next>::size;
  * Specialization for a linked list node with null end (@ref null_type).
  */
 template <typename Item>
-struct list_node<Item,null_type>
+struct list_node<Item, null_type>
 {
 	/// @brief Reference to itself.
-	using type = list_node<Item,null_type>;
+	using type = list_node<Item, null_type>;
 
 	/// @brief The list's head.
 	using head = Item;
@@ -79,7 +79,7 @@ struct list_node<Item,null_type>
 };
 
 template <typename Item>
-constexpr std::size_t list_node<Item,null_type>::size;
+constexpr std::size_t list_node<Item, null_type>::size;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -94,10 +94,10 @@ struct list_impl;
 /**
  * @brief Helper for `list`.
  */
-template <typename First,typename... Others>
-struct list_impl<First,Others...>
+template <typename First, typename... Others>
+struct list_impl<First, Others...>
 {
-	using type = list_node<First,typename list_impl<Others...>::type>;
+	using type = list_node<First, typename list_impl<Others...>::type>;
 };
 
 

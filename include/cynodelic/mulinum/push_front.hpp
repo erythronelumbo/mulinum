@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -31,7 +31,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `push_front`.
  */
-template <typename,typename>
+template <typename, typename>
 struct push_front_impl {};
 
 
@@ -42,9 +42,9 @@ template <
 	typename    Item,
 	typename... Items
 >
-struct push_front_impl<Item,vector<Items...>>
+struct push_front_impl<Item, vector<Items...>>
 {
-	using type = vector<Item,Items...>;
+	using type = vector<Item, Items...>;
 };
 
 
@@ -56,9 +56,9 @@ template <
 	typename ListHead,
 	typename ListTail
 >
-struct push_front_impl<Item,list_node<ListHead,ListTail>>
+struct push_front_impl<Item, list_node<ListHead, ListTail>>
 {
-	using type = list_node<Item,list_node<ListHead,ListTail>>;
+	using type = list_node<Item, list_node<ListHead, ListTail>>;
 };
 
 
@@ -70,9 +70,9 @@ template <
 	IntType    Item,
 	IntType... Items
 >
-struct push_front_impl<integer_c<IntType,Item>,vector_c<IntType,Items...>>
+struct push_front_impl<integer_c<IntType, Item>, vector_c<IntType, Items...>>
 {
-	using type = vector_c<IntType,Item,Items...>;
+	using type = vector_c<IntType, Item, Items...>;
 };
 
 
@@ -85,9 +85,9 @@ template <
 	IntType  ListHead,
 	typename ListTail
 >
-struct push_front_impl<integer_c<IntType,Item>,list_node_c<IntType,ListHead,ListTail>>
+struct push_front_impl<integer_c<IntType, Item>, list_node_c<IntType, ListHead, ListTail>>
 {
-	using type = list_node_c<IntType,Item,list_node_c<IntType,ListHead,ListTail>>;
+	using type = list_node_c<IntType, Item, list_node_c<IntType, ListHead, ListTail>>;
 };
 
 
@@ -98,9 +98,9 @@ template <
 	char    Item,
 	char... Items
 >
-struct push_front_impl<integer_c<char,Item>,string<Items...>>
+struct push_front_impl<integer_c<char, Item>, string<Items...>>
 {
-	using type = string<Item,Items...>;
+	using type = string<Item, Items...>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -112,11 +112,11 @@ struct push_front_impl<integer_c<char,Item>,string<Items...>>
  *
  * Inserts an element to the front (beginning) of a container.
  *
- * @param Container The container.
+ * @param Container Any container.
  * @param Item      The item to insert.
  */
-template <typename Container,typename Item>
-using push_front = typename push_front_impl<Item,Container>::type;
+template <typename Container, typename Item>
+using push_front = typename push_front_impl<Item, Container>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

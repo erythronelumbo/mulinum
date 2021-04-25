@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -45,15 +45,15 @@ struct is_empty_impl<vector<Items...>> : bool_c<(sizeof...(Items) == 0)> {};
 /**
  * @brief Helper for `is_empty`.
  */
-template <typename ListHead,typename ListTail>
-struct is_empty_impl<list_node<ListHead,ListTail>> : false_ {};
+template <typename ListHead, typename ListTail>
+struct is_empty_impl<list_node<ListHead, ListTail>> : false_ {};
 
 
 /**
  * @brief Helper for `is_empty`.
  */
-template <typename IntType,IntType ListHead,typename ListTail>
-struct is_empty_impl<list_node_c<IntType,ListHead,ListTail>> : false_ {};
+template <typename IntType, IntType ListHead, typename ListTail>
+struct is_empty_impl<list_node_c<IntType, ListHead, ListTail>> : false_ {};
 
 
 /**
@@ -66,8 +66,8 @@ struct is_empty_impl<null_type> : true_ {};
 /**
  * @brief Helper for `is_empty`.
  */
-template <typename IntType,IntType... Items>
-struct is_empty_impl<vector_c<IntType,Items...>> : bool_c<(sizeof...(Items) == 0)> {};
+template <typename IntType, IntType... Items>
+struct is_empty_impl<vector_c<IntType, Items...>> : bool_c<(sizeof...(Items) == 0)> {};
 
 
 /**
@@ -83,9 +83,10 @@ struct is_empty_impl<string<Items...>> : bool_c<(sizeof...(Items) == 0)> {};
  * @ingroup containerops
  * @brief Emptiness checker.
  *
- * Determines if a container is empty, i.e., it has no elements.
+ * Determines if a container is empty (has no elements), resulting in a
+ * @ref bool_c .
  *
- * @param Container The container.
+ * @param Container The container to be checked.
  */
 template <typename Container>
 using is_empty = typename is_empty_impl<Container>::type;

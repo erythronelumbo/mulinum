@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -32,8 +32,8 @@ struct bit_not_impl {};
 /**
  * @brief Helper for `bit_not`.
  */
-template <typename IntType,IntType Value>
-struct bit_not_impl<integer_c<IntType,Value>> : integer_c<IntType,~Value>
+template <typename IntType, IntType Value>
+struct bit_not_impl<integer_c<IntType, Value>> : integer_c<IntType, ~Value>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,42 +30,42 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename Comparator,typename TypeA,typename TypeB>
-	using call_comparator = typename Comparator::template apply<TypeA,TypeB>::type;
+	template <typename Comparator, typename TypeA, typename TypeB>
+	using call_comparator = typename Comparator::template apply<TypeA, TypeB>::type;
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename,typename,typename>
+	template <typename, typename, typename>
 	struct sort_merge_impl;
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename IntType,IntType FirstB,IntType... Others,typename Comparator>
+	template <typename IntType, IntType FirstB, IntType... Others, typename Comparator>
 	struct sort_merge_impl<
 		vector_c<IntType>,
-		vector_c<IntType,FirstB,Others...>,
+		vector_c<IntType, FirstB, Others...>,
 		Comparator
 	>
 	{
-		using type = vector_c<IntType,FirstB,Others...>;
+		using type = vector_c<IntType, FirstB, Others...>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename IntType,IntType FirstA,IntType... Others,typename Comparator>
+	template <typename IntType, IntType FirstA, IntType... Others, typename Comparator>
 	struct sort_merge_impl<
-		vector_c<IntType,FirstA,Others...>,
+		vector_c<IntType, FirstA, Others...>,
 		vector_c<IntType>,
 		Comparator
 	>
 	{
-		using type = vector_c<IntType,FirstA,Others...>;
+		using type = vector_c<IntType, FirstA, Others...>;
 	};
 
 
@@ -74,35 +74,35 @@ namespace detail
 	 */
 	template <
 		typename IntType,
-		IntType FirstA,IntType... OthersA,
-		IntType FirstB,IntType... OthersB,
+		IntType FirstA, IntType... OthersA,
+		IntType FirstB, IntType... OthersB,
 		typename Comparator
 	>
 	struct sort_merge_impl<
-		vector_c<IntType,FirstA,OthersA...>,
-		vector_c<IntType,FirstB,OthersB...>,
+		vector_c<IntType, FirstA, OthersA...>,
+		vector_c<IntType, FirstB, OthersB...>,
 		Comparator
 	>
 	{
 		using type = if_<
 			call_comparator<
 				Comparator,
-				integer_c<IntType,FirstA>,
-				integer_c<IntType,FirstB>
+				integer_c<IntType, FirstA>,
+				integer_c<IntType, FirstB>
 			>::value,
 			concat<
-				vector_c<IntType,FirstA>,
+				vector_c<IntType, FirstA>,
 				typename sort_merge_impl<
-					vector_c<IntType,OthersA...>,
-					vector_c<IntType,FirstB,OthersB...>,
+					vector_c<IntType, OthersA...>,
+					vector_c<IntType, FirstB, OthersB...>,
 					Comparator
 				>::type
 			>,
 			concat<
-				vector_c<IntType,FirstB>,
+				vector_c<IntType, FirstB>,
 				typename sort_merge_impl<
-					vector_c<IntType,FirstA,OthersA...>,
-					vector_c<IntType,OthersB...>,
+					vector_c<IntType, FirstA, OthersA...>,
+					vector_c<IntType, OthersB...>,
 					Comparator
 				>::type
 			>
@@ -113,28 +113,28 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <char FirstB,char... Others,typename Comparator>
+	template <char FirstB, char... Others, typename Comparator>
 	struct sort_merge_impl<
 		string<>,
-		string<FirstB,Others...>,
+		string<FirstB, Others...>,
 		Comparator
 	>
 	{
-		using type = string<FirstB,Others...>;
+		using type = string<FirstB, Others...>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <char FirstA,char... Others,typename Comparator>
+	template <char FirstA, char... Others, typename Comparator>
 	struct sort_merge_impl<
-		string<FirstA,Others...>,
+		string<FirstA, Others...>,
 		string<>,
 		Comparator
 	>
 	{
-		using type = string<FirstA,Others...>;
+		using type = string<FirstA, Others...>;
 	};
 
 
@@ -142,13 +142,13 @@ namespace detail
 	 * @brief Helper for @ref sort.
 	 */
 	template <
-		char FirstA,char... OthersA,
-		char FirstB,char... OthersB,
+		char FirstA, char... OthersA,
+		char FirstB, char... OthersB,
 		typename Comparator
 	>
 	struct sort_merge_impl<
-		string<FirstA,OthersA...>,
-		string<FirstB,OthersB...>,
+		string<FirstA, OthersA...>,
+		string<FirstB, OthersB...>,
 		Comparator
 	>
 	{
@@ -162,14 +162,14 @@ namespace detail
 				string<FirstA>,
 				typename sort_merge_impl<
 					string<OthersA...>,
-					string<FirstB,OthersB...>,
+					string<FirstB, OthersB...>,
 					Comparator
 				>::type
 			>,
 			concat<
 				string<FirstB>,
 				typename sort_merge_impl<
-					string<FirstA,OthersA...>,
+					string<FirstA, OthersA...>,
 					string<OthersB...>,
 					Comparator
 				>::type
@@ -181,28 +181,28 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename IntType,IntType FirstB,typename TailB,typename Comparator>
+	template <typename IntType, IntType FirstB, typename TailB, typename Comparator>
 	struct sort_merge_impl<
 		null_type,
-		list_node_c<IntType,FirstB,TailB>,
+		list_node_c<IntType, FirstB, TailB>,
 		Comparator
 	>
 	{
-		using type = list_node_c<IntType,FirstB,TailB>;
+		using type = list_node_c<IntType, FirstB, TailB>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename IntType,IntType FirstA,typename TailA,typename Comparator>
+	template <typename IntType, IntType FirstA, typename TailA, typename Comparator>
 	struct sort_merge_impl<
-		list_node_c<IntType,FirstA,TailA>,
+		list_node_c<IntType, FirstA, TailA>,
 		null_type,
 		Comparator
 	>
 	{
-		using type = list_node_c<IntType,FirstA,TailA>;
+		using type = list_node_c<IntType, FirstA, TailA>;
 	};
 
 
@@ -211,34 +211,34 @@ namespace detail
 	 */
 	template <
 		typename IntType,
-		IntType FirstA,typename TailA,
-		IntType FirstB,typename TailB,
+		IntType FirstA, typename TailA,
+		IntType FirstB, typename TailB,
 		typename Comparator
 	>
 	struct sort_merge_impl<
-		list_node_c<IntType,FirstA,TailA>,
-		list_node_c<IntType,FirstB,TailB>,
+		list_node_c<IntType, FirstA, TailA>,
+		list_node_c<IntType, FirstB, TailB>,
 		Comparator
 	>
 	{
 		using type = if_<
 			call_comparator<
 				Comparator,
-				integer_c<IntType,FirstA>,
-				integer_c<IntType,FirstB>
+				integer_c<IntType, FirstA>,
+				integer_c<IntType, FirstB>
 			>::value,
 			list_node_c<
-				IntType,FirstA,
+				IntType, FirstA,
 				typename sort_merge_impl<
 					TailA,
-					list_node_c<IntType,FirstB,TailB>,
+					list_node_c<IntType, FirstB, TailB>,
 					Comparator
 				>::type
 			>,
 			list_node_c<
-				IntType,FirstB,
+				IntType, FirstB,
 				typename sort_merge_impl<
-					list_node_c<IntType,FirstA,TailA>,
+					list_node_c<IntType, FirstA, TailA>,
 					TailB,
 					Comparator
 				>::type
@@ -250,28 +250,28 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename FirstB,typename... Others,typename Comparator>
+	template <typename FirstB, typename... Others, typename Comparator>
 	struct sort_merge_impl<
 		vector<>,
-		vector<FirstB,Others...>,
+		vector<FirstB, Others...>,
 		Comparator
 	>
 	{
-		using type = vector<FirstB,Others...>;
+		using type = vector<FirstB, Others...>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename FirstA,typename... Others,typename Comparator>
+	template <typename FirstA, typename... Others, typename Comparator>
 	struct sort_merge_impl<
-		vector<FirstA,Others...>,
+		vector<FirstA, Others...>,
 		vector<>,
 		Comparator
 	>
 	{
-		using type = vector<FirstA,Others...>;
+		using type = vector<FirstA, Others...>;
 	};
 
 
@@ -279,30 +279,30 @@ namespace detail
 	 * @brief Helper for @ref sort.
 	 */
 	template <
-		typename FirstA,typename... OthersA,
-		typename FirstB,typename... OthersB,
+		typename FirstA, typename... OthersA,
+		typename FirstB, typename... OthersB,
 		typename Comparator
 	>
 	struct sort_merge_impl<
-		vector<FirstA,OthersA...>,
-		vector<FirstB,OthersB...>,
+		vector<FirstA, OthersA...>,
+		vector<FirstB, OthersB...>,
 		Comparator
 	>
 	{
 		using type = if_<
-			call_comparator<Comparator,FirstA,FirstB>::value,
+			call_comparator<Comparator, FirstA, FirstB>::value,
 			concat<
 				vector<FirstA>,
 				typename sort_merge_impl<
 					vector<OthersA...>,
-					vector<FirstB,OthersB...>,
+					vector<FirstB, OthersB...>,
 					Comparator
 				>::type
 			>,
 			concat<
 				vector<FirstB>,
 				typename sort_merge_impl<
-					vector<FirstA,OthersA...>,
+					vector<FirstA, OthersA...>,
 					vector<OthersB...>,
 					Comparator
 				>::type
@@ -314,28 +314,28 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename FirstB,typename TailB,typename Comparator>
+	template <typename FirstB, typename TailB, typename Comparator>
 	struct sort_merge_impl<
 		null_type,
-		list_node<FirstB,TailB>,
+		list_node<FirstB, TailB>,
 		Comparator
 	>
 	{
-		using type = list_node<FirstB,TailB>;
+		using type = list_node<FirstB, TailB>;
 	};
 
 
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename FirstA,typename TailA,typename Comparator>
+	template <typename FirstA, typename TailA, typename Comparator>
 	struct sort_merge_impl<
-		list_node<FirstA,TailA>,
+		list_node<FirstA, TailA>,
 		null_type,
 		Comparator
 	>
 	{
-		using type = list_node<FirstA,TailA>;
+		using type = list_node<FirstA, TailA>;
 	};
 
 
@@ -343,30 +343,30 @@ namespace detail
 	 * @brief Helper for @ref sort.
 	 */
 	template <
-		typename FirstA,typename TailA,
-		typename FirstB,typename TailB,
+		typename FirstA, typename TailA,
+		typename FirstB, typename TailB,
 		typename Comparator
 	>
 	struct sort_merge_impl<
-		list_node<FirstA,TailA>,
-		list_node<FirstB,TailB>,
+		list_node<FirstA, TailA>,
+		list_node<FirstB, TailB>,
 		Comparator
 	>
 	{
 		using type = if_<
-			call_comparator<Comparator,FirstA,FirstB>::value,
+			call_comparator<Comparator, FirstA, FirstB>::value,
 			list_node<
 				FirstA,
 				typename sort_merge_impl<
 					TailA,
-					list_node<FirstB,TailB>,
+					list_node<FirstB, TailB>,
 					Comparator
 				>::type
 			>,
 			list_node<
 				FirstB,
 				typename sort_merge_impl<
-					list_node<FirstA,TailA>,
+					list_node<FirstA, TailA>,
 					TailB,
 					Comparator
 				>::type
@@ -378,8 +378,8 @@ namespace detail
 	/**
 	 * @brief Helper for @ref sort.
 	 */
-	template <typename HalfCont1,typename HalfCont2,typename Comparator>
-	using sort_merge = typename sort_merge_impl<HalfCont1,HalfCont2,Comparator>::type;
+	template <typename HalfCont1, typename HalfCont2, typename Comparator>
+	using sort_merge = typename sort_merge_impl<HalfCont1, HalfCont2, Comparator>::type;
 } // end of "detail" namespace
 
 }} // end of "cynodelic::mulinum" namespace

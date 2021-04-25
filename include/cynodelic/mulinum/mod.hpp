@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -34,13 +34,13 @@ struct mod_impl {};
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR
+	IntType ValueL, IntType ValueR
 >
 struct mod_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>
 > :
-	integer_c<IntType,ValueL % ValueR>
+	integer_c<IntType, ValueL % ValueR>
 {};
 
 
@@ -49,15 +49,15 @@ struct mod_impl<
  */
 template <
 	typename IntType,
-	IntType ValueL,IntType ValueR,
+	IntType ValueL, IntType ValueR,
 	typename... Others
 	>
 struct mod_impl<
-	integer_c<IntType,ValueL>,
-	integer_c<IntType,ValueR>,
+	integer_c<IntType, ValueL>,
+	integer_c<IntType, ValueR>,
 	Others...
 > :
-	mod_impl<integer_c<IntType,ValueL % ValueR>,Others...>
+	mod_impl<integer_c<IntType, ValueL % ValueR>, Others...>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -67,9 +67,10 @@ struct mod_impl<
  * @ingroup arithmeticops
  * @brief Modulus.
  *
- * Performs modulus of integer types of the same type (@ref integer_c s).
+ * Performs the modulus of at least two integers of the same type
+ * (@ref integer_c s).
  *
- * @param Integers... All the types.
+ * @param Integers... Arithmetic types.
  */
 template <typename... Integers>
 using mod = typename mod_impl<Integers...>::type;

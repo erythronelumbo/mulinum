@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,17 +30,17 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `string_to_int`.
  */
-template <typename,typename,typename = void>
+template <typename, typename, typename = void>
 struct string_to_int_impl {};
 
 
 /**
  * @brief Helper for `string_to_int`.
  */
-template <typename IntType,char First,char... Others>
+template <typename IntType, char First, char... Others>
 struct string_to_int_impl<
 	IntType,
-	string<First,Others...>,
+	string<First, Others...>,
 	detail::enable_if<detail::is_signed<IntType>::value && (First == '-')>
 > :
 	detail::enable_if<
@@ -61,18 +61,18 @@ struct string_to_int_impl<
 /**
  * @brief Helper for `string_to_int`.
  */
-template <typename IntType,char First,char... Others>
+template <typename IntType, char First, char... Others>
 struct string_to_int_impl<
 	IntType,
-	string<First,Others...>,
+	string<First, Others...>,
 	detail::enable_if<detail::is_signed<IntType>::value && (First != '-')>
 > :
 	detail::enable_if<
-		detail::has_digits<string<First,Others...>>::value,
+		detail::has_digits<string<First, Others...>>::value,
 		typename detail::make_int_from_string<
 			IntType,
-			string<First,Others...>,
-			string<First,Others...>::size - 1,
+			string<First, Others...>,
+			string<First, Others...>::size - 1,
 			1,
 			string<Others...>::size == 0
 		>::type
@@ -83,18 +83,18 @@ struct string_to_int_impl<
 /**
  * @brief Helper for `string_to_int`.
  */
-template <typename IntType,char First,char... Others>
+template <typename IntType, char First, char... Others>
 struct string_to_int_impl<
 	IntType,
-	string<First,Others...>,
+	string<First, Others...>,
 	detail::enable_if<detail::is_unsigned<IntType>::value>
 > :
 	detail::enable_if<
-		detail::has_digits<string<First,Others...>>::value,
+		detail::has_digits<string<First, Others...>>::value,
 		typename detail::make_int_from_string<
 			IntType,
-			string<First,Others...>,
-			string<First,Others...>::size - 1,
+			string<First, Others...>,
+			string<First, Others...>::size - 1,
 			1,
 			string<Others...>::size == 0
 		>::type
@@ -114,8 +114,8 @@ struct string_to_int_impl<
  * @param IntType The type of the result (an integer).
  * @param StringT The input string (a @ref string).
  */
-template <typename IntType,typename StringT>
-using string_to_int = typename string_to_int_impl<IntType,StringT>::type;
+template <typename IntType, typename StringT>
+using string_to_int = typename string_to_int_impl<IntType, StringT>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -31,7 +31,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `push_back`.
  */
-template <typename,typename>
+template <typename, typename>
 struct push_back_impl {};
 
 
@@ -42,9 +42,9 @@ template <
 	typename    Item,
 	typename... Items
 >
-struct push_back_impl<Item,vector<Items...>>
+struct push_back_impl<Item, vector<Items...>>
 {
-	using type = vector<Items...,Item>;
+	using type = vector<Items..., Item>;
 };
 
 
@@ -56,9 +56,9 @@ template <
 	typename ListHead,
 	typename ListTail
 >
-struct push_back_impl<Item,list_node<ListHead,ListTail>>
+struct push_back_impl<Item, list_node<ListHead, ListTail>>
 {
-	using type = list_node<ListHead,typename push_back_impl<Item,ListTail>::type>;
+	using type = list_node<ListHead, typename push_back_impl<Item, ListTail>::type>;
 };
 
 
@@ -69,9 +69,9 @@ template <
 	typename Item,
 	typename ListHead
 >
-struct push_back_impl<Item,list_node<ListHead,null_type>>
+struct push_back_impl<Item, list_node<ListHead, null_type>>
 {
-	using type = list_node<ListHead,list_node<Item,null_type>>;
+	using type = list_node<ListHead, list_node<Item, null_type>>;
 };
 
 
@@ -83,9 +83,9 @@ template <
 	IntType    Item,
 	IntType... Items
 >
-struct push_back_impl<integer_c<IntType,Item>,vector_c<IntType,Items...>>
+struct push_back_impl<integer_c<IntType, Item>, vector_c<IntType, Items...>>
 {
-	using type = vector_c<IntType,Items...,Item>;
+	using type = vector_c<IntType, Items..., Item>;
 };
 
 
@@ -98,9 +98,9 @@ template <
 	IntType  ListHead,
 	typename ListTail
 >
-struct push_back_impl<integer_c<IntType,Item>,list_node_c<IntType,ListHead,ListTail>>
+struct push_back_impl<integer_c<IntType, Item>, list_node_c<IntType, ListHead, ListTail>>
 {
-	using type = list_node_c<IntType,ListHead,typename push_back_impl<integer_c<IntType,Item>,ListTail>::type>;
+	using type = list_node_c<IntType, ListHead, typename push_back_impl<integer_c<IntType, Item>, ListTail>::type>;
 };
 
 
@@ -112,9 +112,9 @@ template <
 	IntType  Item,
 	IntType  ListHead
 >
-struct push_back_impl<integer_c<IntType,Item>,list_node_c<IntType,ListHead,null_type>>
+struct push_back_impl<integer_c<IntType, Item>, list_node_c<IntType, ListHead, null_type>>
 {
-	using type = list_node_c<IntType,ListHead,list_node_c<IntType,Item,null_type>>;
+	using type = list_node_c<IntType, ListHead, list_node_c<IntType, Item, null_type>>;
 };
 
 
@@ -125,9 +125,9 @@ template <
 	char    Item,
 	char... Items
 >
-struct push_back_impl<integer_c<char,Item>,string<Items...>>
+struct push_back_impl<integer_c<char, Item>, string<Items...>>
 {
-	using type = string<Items...,Item>;
+	using type = string<Items..., Item>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -139,11 +139,11 @@ struct push_back_impl<integer_c<char,Item>,string<Items...>>
  *
  * Inserts an element to the end of a container.
  *
- * @param Container The container.
+ * @param Container Any container.
  * @param Item      The item to insert.
  */
-template <typename Container,typename Item>
-using push_back = typename push_back_impl<Item,Container>::type;
+template <typename Container, typename Item>
+using push_back = typename push_back_impl<Item, Container>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

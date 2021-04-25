@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -32,17 +32,17 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `at`.
  */
-template <typename,typename,bool>
+template <typename, typename, bool>
 struct at_impl {};
 
 
 /**
  * @brief Helper for `at`.
  */
-template <typename... Items,std::size_t Idx,bool Dummy>
-struct at_impl<vector<Items...>,size_c<Idx>,Dummy>
+template <typename... Items, std::size_t Idx, bool Dummy>
+struct at_impl<vector<Items...>, size_c<Idx>, Dummy>
 {
-	using type = typename detail::vector_at<vector<Items...>,Idx>::type;
+	using type = typename detail::vector_at<vector<Items...>, Idx>::type;
 };
 
 
@@ -54,9 +54,9 @@ template <
 	typename    Tail,
 	std::size_t Idx
 >
-struct at_impl<list_node<HeadItem,Tail>,size_c<Idx>,false>
+struct at_impl<list_node<HeadItem, Tail>, size_c<Idx>, false>
 {
-	using type = typename at_impl<Tail,size_c<Idx - 1>,(Idx - 1) == 0>::type;
+	using type = typename at_impl<Tail, size_c<Idx - 1>, (Idx - 1) == 0>::type;
 };
 
 
@@ -67,7 +67,7 @@ template <
 	typename HeadItem,
 	typename Tail
 >
-struct at_impl<list_node<HeadItem,Tail>,size_c<0>,true>
+struct at_impl<list_node<HeadItem, Tail>, size_c<0>, true>
 {
 	using type = HeadItem;
 };
@@ -76,36 +76,36 @@ struct at_impl<list_node<HeadItem,Tail>,size_c<0>,true>
 /**
  * @brief Helper for `at`.
  */
-template <char... Chars,std::size_t Idx,bool Dummy>
-struct at_impl<string<Chars...>,size_c<Idx>,Dummy> :
-	integer_c<char,string<Chars...>::data[Idx]>
+template <char... Chars, std::size_t Idx, bool Dummy>
+struct at_impl<string<Chars...>, size_c<Idx>, Dummy> :
+	integer_c<char, string<Chars...>::data[Idx]>
 {};
 
 
 /**
  * @brief Helper for `at`.
  */
-template <typename IntType,IntType... Items,std::size_t Idx,bool Dummy>
-struct at_impl<vector_c<IntType,Items...>,size_c<Idx>,Dummy> :
-	integer_c<IntType,vector_c<IntType,Items...>::data[Idx]>
+template <typename IntType, IntType... Items, std::size_t Idx, bool Dummy>
+struct at_impl<vector_c<IntType, Items...>, size_c<Idx>, Dummy> :
+	integer_c<IntType, vector_c<IntType, Items...>::data[Idx]>
 {};
 
 
 /**
  * @brief Helper for `at`.
  */
-template <typename IntType,IntType HeadItem,std::size_t Idx,typename Tail>
-struct at_impl<list_node_c<IntType,HeadItem,Tail>,size_c<Idx>,false> :
-	integer_c<IntType,at_impl<Tail,size_c<Idx - 1>,(Idx - 1) == 0>::value>
+template <typename IntType, IntType HeadItem, std::size_t Idx, typename Tail>
+struct at_impl<list_node_c<IntType, HeadItem, Tail>, size_c<Idx>, false> :
+	integer_c<IntType, at_impl<Tail, size_c<Idx - 1>, (Idx - 1) == 0>::value>
 {};
 
 
 /**
  * @brief Helper for `at`.
  */
-template <typename IntType,IntType HeadItem,typename Tail>
-struct at_impl<list_node_c<IntType,HeadItem,Tail>,size_c<0>,true> :
-	integer_c<IntType,HeadItem>
+template <typename IntType, IntType HeadItem, typename Tail>
+struct at_impl<list_node_c<IntType, HeadItem, Tail>, size_c<0>, true> :
+	integer_c<IntType, HeadItem>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -122,8 +122,8 @@ struct at_impl<list_node_c<IntType,HeadItem,Tail>,size_c<0>,true> :
  * @param Idx           The position where the desired element is (a
  *                      @ref size_c).
  */
-template <typename TypeContainer,typename Idx>
-using at = typename at_impl<TypeContainer,Idx,(Idx::value == 0)>::type;
+template <typename TypeContainer, typename Idx>
+using at = typename at_impl<TypeContainer, Idx, (Idx::value == 0)>::type;
 
 
 /**
@@ -136,8 +136,8 @@ using at = typename at_impl<TypeContainer,Idx,(Idx::value == 0)>::type;
  * @param TypeContainer The container.
  * @param Idx           The position where the desired element is.
  */
-template <typename TypeContainer,std::size_t Idx>
-using at_c = typename at_impl<TypeContainer,size_c<Idx>,(Idx == 0)>::type;
+template <typename TypeContainer, std::size_t Idx>
+using at_c = typename at_impl<TypeContainer, size_c<Idx>, (Idx == 0)>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

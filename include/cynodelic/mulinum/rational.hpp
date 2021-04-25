@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,7 +33,7 @@ namespace cynodelic { namespace mulinum {
  * @param Num The numerator.
  * @param Den The denominator (default: `1`).
  */
-template <std::intmax_t Num,std::intmax_t Den = 1>
+template <std::intmax_t Num, std::intmax_t Den = 1>
 struct rational
 {
 	/// @brief Reference to itself.
@@ -43,10 +43,10 @@ struct rational
 	using value_type = std::intmax_t;
 
 	/// @brief The simplified numerator.
-	static constexpr value_type num = detail::simplify_num(Num,Den);
+	static constexpr value_type num = detail::simplify_num(Num, Den);
 
 	/// @brief The simplified denominator.
-	static constexpr value_type den = detail::simplify_den(Num,Den);
+	static constexpr value_type den = detail::simplify_den(Num, Den);
 
 	/// @brief Type tag.
 	using type_tag = rational_tag;
@@ -70,11 +70,11 @@ struct rational
 	}
 };
 
-template <std::intmax_t Num,std::intmax_t Den>
-constexpr std::intmax_t rational<Num,Den>::num;
+template <std::intmax_t Num, std::intmax_t Den>
+constexpr std::intmax_t rational<Num, Den>::num;
 
-template <std::intmax_t Num,std::intmax_t Den>
-constexpr std::intmax_t rational<Num,Den>::den;
+template <std::intmax_t Num, std::intmax_t Den>
+constexpr std::intmax_t rational<Num, Den>::den;
 
 
 }} // end of "cynodelic::mulinum" namespace

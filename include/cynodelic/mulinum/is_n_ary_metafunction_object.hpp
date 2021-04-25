@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -32,21 +32,21 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `is_n_ary_metafunction_object`.
  */
-template <typename,typename,typename = void>
+template <typename, typename, typename = void>
 struct is_n_ary_metafunction_object_impl : false_ {};
 
 
 /**
  * @brief Helper for `is_n_ary_metafunction_object`.
  */
-template <typename T,std::size_t Arity>
+template <typename T, std::size_t Arity>
 struct is_n_ary_metafunction_object_impl<
 	T,
 	size_c<Arity>,
 	detail::void_t<
 		apply<
 			T::template apply,
-			fill<vector_tag,detail::dummy<0>,size_c<Arity>>
+			fill<vector_tag, detail::dummy<0>, size_c<Arity>>
 		>
 	>
 > : true_ {};
@@ -59,13 +59,13 @@ struct is_n_ary_metafunction_object_impl<
  * @brief Checks if a type is an N-ary metafunction object
  *
  * Determiness if a type `T` is an N-ary metafunction object, i.e., its `apply`
- * member, if any, has N arguments.
+ * member, if any, has N arguments. It results in @ref true_ or @ref false_ .
  *
  * @param T     The type to check.
  * @param Arity The arity (number of arguments, must be a @ref size_c).
  */
-template <typename T,typename Arity>
-using is_n_ary_metafunction_object = typename is_n_ary_metafunction_object_impl<T,Arity>::type;
+template <typename T, typename Arity>
+using is_n_ary_metafunction_object = typename is_n_ary_metafunction_object_impl<T, Arity>::type;
 
 
 /**
@@ -73,13 +73,13 @@ using is_n_ary_metafunction_object = typename is_n_ary_metafunction_object_impl<
  * @brief Checks if a type is an N-ary metafunction object
  *
  * Determiness if a type `T` is an N-ary metafunction object, i.e., its `apply`
- * member, if any, has N arguments.
+ * member, if any, has N arguments. It results in @ref true_ or @ref false_ .
  *
  * @param T     The type to check.
  * @param Arity The arity (number of arguments).
  */
-template <typename T,std::size_t Arity>
-using is_n_ary_metafunction_object_c = typename is_n_ary_metafunction_object_impl<T,size_c<Arity>>::type;
+template <typename T, std::size_t Arity>
+using is_n_ary_metafunction_object_c = typename is_n_ary_metafunction_object_impl<T, size_c<Arity>>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -27,7 +27,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `transform`.
  */
-template <typename,typename>
+template <typename, typename>
 struct transform_impl {};
 
 
@@ -40,11 +40,11 @@ template <
 	typename... Others,
 	typename    Functor
 >
-struct transform_impl<TypeContainer<First,Others...>,Functor>
+struct transform_impl<TypeContainer<First, Others...>, Functor>
 {
 	using type = concat<
 		TypeContainer<typename Functor::template apply<First>::type>,
-		typename transform_impl<TypeContainer<Others...>,Functor>::type
+		typename transform_impl<TypeContainer<Others...>, Functor>::type
 	>;
 };
 
@@ -57,7 +57,7 @@ template <
 	typename Last,
 	typename Functor
 >
-struct transform_impl<TypeContainer<Last>,Functor>
+struct transform_impl<TypeContainer<Last>, Functor>
 {
 	using type = TypeContainer<typename Functor::template apply<Last>::type>;
 };
@@ -71,11 +71,11 @@ template <
 	typename Tail,
 	typename Functor
 >
-struct transform_impl<list_node<First,Tail>,Functor>
+struct transform_impl<list_node<First, Tail>, Functor>
 {
 	using type = list_node<
 		typename Functor::template apply<First>::type,
-		typename transform_impl<Tail,Functor>::type
+		typename transform_impl<Tail, Functor>::type
 	>;
 };
 
@@ -87,7 +87,7 @@ template <
 	typename Last,
 	typename Functor
 >
-struct transform_impl<list_node<Last,null_type>,Functor>
+struct transform_impl<list_node<Last, null_type>, Functor>
 {
 	using type = list_node<
 		typename Functor::template apply<Last>::type,
@@ -108,8 +108,8 @@ struct transform_impl<list_node<Last,null_type>,Functor>
  * @param Functor       The metafunction object that will be used to transform
  *                      the elements.
  */
-template <typename TypeContainer,typename Functor>
-using transform = typename transform_impl<TypeContainer,Functor>::type;
+template <typename TypeContainer, typename Functor>
+using transform = typename transform_impl<TypeContainer, Functor>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

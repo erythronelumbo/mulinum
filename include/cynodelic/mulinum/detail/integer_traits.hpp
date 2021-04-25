@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -28,12 +28,12 @@ namespace detail
 	template <typename IntType>
 	struct is_signed :
 		bool_c<
-			equals<IntType,char>::value ||
-			equals<IntType,signed char>::value ||
-			equals<IntType,short>::value ||
-			equals<IntType,int>::value ||
-			equals<IntType,long>::value ||
-			equals<IntType,long long>::value
+			equals<IntType, char>::value ||
+			equals<IntType, signed char>::value ||
+			equals<IntType, short>::value ||
+			equals<IntType, int>::value ||
+			equals<IntType, long>::value ||
+			equals<IntType, long long>::value
 		>
 	{};
 
@@ -44,11 +44,11 @@ namespace detail
 	template <typename UIntType>
 	struct is_unsigned :
 		bool_c<
-			equals<UIntType,unsigned char>::value ||
-			equals<UIntType,unsigned short>::value ||
-			equals<UIntType,unsigned int>::value ||
-			equals<UIntType,unsigned long>::value ||
-			equals<UIntType,unsigned long long>::value
+			equals<UIntType, unsigned char>::value ||
+			equals<UIntType, unsigned short>::value ||
+			equals<UIntType, unsigned int>::value ||
+			equals<UIntType, unsigned long>::value ||
+			equals<UIntType, unsigned long long>::value
 		>
 	{};
 

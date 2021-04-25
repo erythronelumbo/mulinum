@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,7 +30,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `cartesian_product`.
  */
-template <typename,typename,typename...>
+template <typename, typename, typename...>
 struct cartesian_product_impl {};
 
 
@@ -41,9 +41,9 @@ template <
 	typename... ItemsA,
 	typename... ItemsB
 >
-struct cartesian_product_impl<vector<ItemsA...>,vector<ItemsB...>>
+struct cartesian_product_impl<vector<ItemsA...>, vector<ItemsB...>>
 {
-	using type = detail::cartesian_prod_two<vector<ItemsA...>,vector<ItemsB...>>;
+	using type = detail::cartesian_prod_two<vector<ItemsA...>, vector<ItemsB...>>;
 };
 
 
@@ -55,7 +55,7 @@ template <
 	typename... ItemsB,
 	typename... Others
 >
-struct cartesian_product_impl<vector<ItemsA...>,vector<ItemsB...>,Others...>
+struct cartesian_product_impl<vector<ItemsA...>, vector<ItemsB...>, Others...>
 {
 	using type = typename detail::cprod_flatten_multiple<
 		typename cartesian_product_impl<
@@ -73,12 +73,12 @@ struct cartesian_product_impl<vector<ItemsA...>,vector<ItemsB...>,Others...>
  * @brief Helper for `cartesian_product`.
  */
 template <
-	typename HeadA,typename TailA,
-	typename HeadB,typename TailB
+	typename HeadA, typename TailA,
+	typename HeadB, typename TailB
 >
-struct cartesian_product_impl<list_node<HeadA,TailA>,list_node<HeadB,TailB>>
+struct cartesian_product_impl<list_node<HeadA, TailA>, list_node<HeadB, TailB>>
 {
-	using type = detail::cartesian_prod_two<list_node<HeadA,TailA>,list_node<HeadB,TailB>>;
+	using type = detail::cartesian_prod_two<list_node<HeadA, TailA>, list_node<HeadB, TailB>>;
 };
 
 
@@ -86,17 +86,17 @@ struct cartesian_product_impl<list_node<HeadA,TailA>,list_node<HeadB,TailB>>
  * @brief Helper for `cartesian_product`.
  */
 template <
-	typename HeadA,typename TailA,
-	typename HeadB,typename TailB,
+	typename HeadA, typename TailA,
+	typename HeadB, typename TailB,
 	typename... Others
 >
-struct cartesian_product_impl<list_node<HeadA,TailA>,list_node<HeadB,TailB>,Others...>
+struct cartesian_product_impl<list_node<HeadA, TailA>, list_node<HeadB, TailB>, Others...>
 {
 	using type = typename detail::cprod_flatten_multiple<
 		typename cartesian_product_impl<
 			detail::cartesian_prod_two<
-				list_node<HeadA,TailA>,
-				list_node<HeadB,TailB>
+				list_node<HeadA, TailA>,
+				list_node<HeadB, TailB>
 			>,
 			Others...
 		>::type
@@ -110,7 +110,8 @@ struct cartesian_product_impl<list_node<HeadA,TailA>,list_node<HeadB,TailB>,Othe
  * @ingroup containerops
  * @brief Cartesian product.
  *
- * The cartesian product of various type containers of the same type.
+ * Generates the cartesian product of at least two type containers of the same
+ * type.
  *
  * @param TypeContainers... The containers, which must be of the same type.
  */

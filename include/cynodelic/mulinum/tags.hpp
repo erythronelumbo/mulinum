@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -80,7 +80,7 @@ struct integer_container_tag
 
 /**
  * @ingroup typetags
- * @brief Tag type for `vector.
+ * @brief Tag type for `vector`.
  */
 struct vector_tag : public type_container_tag {};
 

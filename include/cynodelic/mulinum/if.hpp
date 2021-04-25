@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -24,7 +24,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `if_`.
  */
-template <bool Cond,typename TrueCase,typename FalseCase>
+template <bool Cond, typename TrueCase, typename FalseCase>
 struct if_impl
 {
 	using type = FalseCase;
@@ -34,8 +34,8 @@ struct if_impl
 /**
  * @brief Helper for `if_`.
  */
-template <typename TrueCase,typename FalseCase>
-struct if_impl<true,TrueCase,FalseCase>
+template <typename TrueCase, typename FalseCase>
+struct if_impl<true, TrueCase, FalseCase>
 {
 	using type = TrueCase;
 };
@@ -47,15 +47,15 @@ struct if_impl<true,TrueCase,FalseCase>
  + @ingroup control
  * @brief Conditional type.
  *
- * If `Cond` is true, yields `TrueCase`, else, yields `FalseCase`. Similar
- * to the `:?` operator.
+ * If `Cond` is true, results in `TrueCase`, otherwise, results in `FalseCase`.
+ * Similar to the `:?` operator.
  *
  * @param Cond      The condition (a `bool`).
  * @param TrueCase  The yielded type when `cond` is `true`.
  * @param FalseCase The yielded type when `cond` is `false`.
  */
-template <bool Cond,typename TrueCase,typename FalseCase>
-using if_ = typename if_impl<Cond,TrueCase,FalseCase>::type;
+template <bool Cond, typename TrueCase, typename FalseCase>
+using if_ = typename if_impl<Cond, TrueCase, FalseCase>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

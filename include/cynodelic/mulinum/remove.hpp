@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,15 +33,15 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `remove`.
  */
-template <typename,typename,std::size_t>
+template <typename, typename, std::size_t>
 struct remove_impl {};
 
 
 /**
  * @brief Helper for `remove`.
  */
-template <typename First,typename... Others,std::size_t Idx,std::size_t Count>
-struct remove_impl<vector<First,Others...>,integer_c<std::size_t,Idx>,Count>
+template <typename First, typename... Others, std::size_t Idx, std::size_t Count>
+struct remove_impl<vector<First, Others...>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
@@ -51,7 +51,7 @@ struct remove_impl<vector<First,Others...>,integer_c<std::size_t,Idx>,Count>
 		>,
 		typename remove_impl<
 			vector<Others...>,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -61,8 +61,8 @@ struct remove_impl<vector<First,Others...>,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <std::size_t Idx,std::size_t Count>
-struct remove_impl<vector<>,integer_c<std::size_t,Idx>,Count>
+template <std::size_t Idx, std::size_t Count>
+struct remove_impl<vector<>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = vector<>;
 };
@@ -71,18 +71,18 @@ struct remove_impl<vector<>,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <typename Head,typename Tail,std::size_t Idx,std::size_t Count>
-struct remove_impl<list_node<Head,Tail>,integer_c<std::size_t,Idx>,Count>
+template <typename Head, typename Tail, std::size_t Idx, std::size_t Count>
+struct remove_impl<list_node<Head, Tail>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
 			null_type,
-			list_node<Head,null_type>
+			list_node<Head, null_type>
 		>,
 		typename remove_impl<
 			Tail,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -92,8 +92,8 @@ struct remove_impl<list_node<Head,Tail>,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <std::size_t Idx,std::size_t Count>
-struct remove_impl<null_type,integer_c<std::size_t,Idx>,Count>
+template <std::size_t Idx, std::size_t Count>
+struct remove_impl<null_type, integer_c<std::size_t, Idx>, Count>
 {
 	using type = null_type;
 };
@@ -102,18 +102,18 @@ struct remove_impl<null_type,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <typename IntType,IntType First,IntType... Others,std::size_t Idx,std::size_t Count>
-struct remove_impl<vector_c<IntType,First,Others...>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType First, IntType... Others, std::size_t Idx, std::size_t Count>
+struct remove_impl<vector_c<IntType, First, Others...>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
 			vector_c<IntType>,
-			vector_c<IntType,First>
+			vector_c<IntType, First>
 		>,
 		typename remove_impl<
 			vector_c<IntType,Others...>,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -123,8 +123,8 @@ struct remove_impl<vector_c<IntType,First,Others...>,integer_c<std::size_t,Idx>,
 /**
  * @brief Helper for `remove`.
  */
-template <typename IntType,std::size_t Idx,std::size_t Count>
-struct remove_impl<vector_c<IntType>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, std::size_t Idx, std::size_t Count>
+struct remove_impl<vector_c<IntType>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = vector_c<IntType>;
 };
@@ -133,18 +133,18 @@ struct remove_impl<vector_c<IntType>,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <typename IntType,IntType Head,typename Tail,std::size_t Idx,std::size_t Count>
-struct remove_impl<list_node_c<IntType,Head,Tail>,integer_c<std::size_t,Idx>,Count>
+template <typename IntType, IntType Head, typename Tail, std::size_t Idx, std::size_t Count>
+struct remove_impl<list_node_c<IntType, Head, Tail>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
 			(Count == Idx),
 			null_type,
-			list_node_c<IntType,Head,null_type>
+			list_node_c<IntType, Head, null_type>
 		>,
 		typename remove_impl<
 			Tail,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -154,8 +154,8 @@ struct remove_impl<list_node_c<IntType,Head,Tail>,integer_c<std::size_t,Idx>,Cou
 /**
  * @brief Helper for `remove`.
  */
-template <char First,char... Others,std::size_t Idx,std::size_t Count>
-struct remove_impl<string<First,Others...>,integer_c<std::size_t,Idx>,Count>
+template <char First, char... Others, std::size_t Idx, std::size_t Count>
+struct remove_impl<string<First, Others...>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = concat<
 		if_<
@@ -165,7 +165,7 @@ struct remove_impl<string<First,Others...>,integer_c<std::size_t,Idx>,Count>
 		>,
 		typename remove_impl<
 			string<Others...>,
-			integer_c<std::size_t,Idx>,
+			integer_c<std::size_t, Idx>,
 			Count + 1
 		>::type
 	>;
@@ -175,8 +175,8 @@ struct remove_impl<string<First,Others...>,integer_c<std::size_t,Idx>,Count>
 /**
  * @brief Helper for `remove`.
  */
-template <std::size_t Idx,std::size_t Count>
-struct remove_impl<string<>,integer_c<std::size_t,Idx>,Count>
+template <std::size_t Idx, std::size_t Count>
+struct remove_impl<string<>, integer_c<std::size_t, Idx>, Count>
 {
 	using type = string<>;
 };
@@ -194,8 +194,8 @@ struct remove_impl<string<>,integer_c<std::size_t,Idx>,Count>
  * @param Idx       The position where the element to remove is (a
  *                  @ref size_c).
  */
-template <typename Container,typename Idx>
-using remove = typename remove_impl<Container,Idx,0>::type;
+template <typename Container, typename Idx>
+using remove = typename remove_impl<Container, Idx, 0>::type;
 
 
 /**
@@ -207,8 +207,8 @@ using remove = typename remove_impl<Container,Idx,0>::type;
  * @param Container The container.
  * @param Idx       The position where the element to remove is.
  */
-template <typename Container,std::size_t Idx>
-using remove_c = typename remove_impl<Container,size_c<Idx>,0>::type;
+template <typename Container, std::size_t Idx>
+using remove_c = typename remove_impl<Container, size_c<Idx>, 0>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

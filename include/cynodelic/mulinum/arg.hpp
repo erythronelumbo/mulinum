@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -35,7 +35,7 @@ namespace cynodelic { namespace mulinum {
 template <std::size_t ArgNum>
 struct arg
 {
-	template <typename FirstArg,typename... Others>
+	template <typename FirstArg, typename... Others>
 	struct apply
 	{
 		using type = typename arg<(ArgNum - 1)>::template apply<Others...>::type;
@@ -53,7 +53,7 @@ struct arg
 template <>
 struct arg<0>
 {
-	template <typename FirstArg,typename... Others>
+	template <typename FirstArg, typename... Others>
 	struct apply
 	{
 		using type = FirstArg;

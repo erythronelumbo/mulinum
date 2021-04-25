@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -29,7 +29,7 @@
  *
  * @param str The string literal.
  */
-#define CYNODELIC_MULINUM_STRING(str) ::cynodelic::mulinum::detail::remove_zeroes<::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str,CYNODELIC_MULINUM_MAX_STRING_LENGTH)>>
+#define CYNODELIC_MULINUM_STRING(str) ::cynodelic::mulinum::detail::remove_zeroes<::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str, CYNODELIC_MULINUM_MAX_STRING_LENGTH)>>
 
 
 /**
@@ -42,7 +42,7 @@
  * @param str          The string literal.
  * @param known_length The string's known length.
  */
-#define CYNODELIC_MULINUM_STRING_KL(str,known_length) ::cynodelic::mulinum::detail::remove_zeroes<::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str,known_length)>>
+#define CYNODELIC_MULINUM_STRING_KL(str, known_length) ::cynodelic::mulinum::detail::remove_zeroes<::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str, known_length)>>
 
 
 /**
@@ -54,7 +54,7 @@
  * @param str          The string literal.
  * @param known_length The string's known length.
  */
-#define CYNODELIC_MULINUM_STRING_NO_ZERO_REMOVAL(str,known_length) ::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str,known_length)>
+#define CYNODELIC_MULINUM_STRING_NO_ZERO_REMOVAL(str, known_length) ::cynodelic::mulinum::string<CYNODELIC_MULINUM_DETAIL_STRING_GET_CHARS(str, known_length)>
 
 
 #endif // CYNODELIC_MULINUM_PREPROCESSOR_PP_STRING_HPP

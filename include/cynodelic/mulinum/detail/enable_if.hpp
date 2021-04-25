@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -23,7 +23,7 @@ namespace detail
 	/**
 	 * @brief Helper for @ref enable_if.
 	 */
-	template <bool X,typename = void>
+	template <bool X, typename = void>
 	struct enable_if_impl;
 
 
@@ -31,17 +31,17 @@ namespace detail
 	 * @brief Helper for @ref enable_if.
 	 */
 	template <typename T>
-	struct enable_if_impl<true,T>
+	struct enable_if_impl<true, T>
 	{
 		using type = T;
 	};
 
 
 	/**
-	 * @brief Helper metafunction for overloading.
+	 * @brief Helper metafunction for overloading and SFINAE.
 	 */
-	template <bool Cond,typename T = void>
-	using enable_if = typename enable_if_impl<Cond,T>::type;
+	template <bool Cond, typename T = void>
+	using enable_if = typename enable_if_impl<Cond, T>::type;
 } // end of "detail" namespace
 
 }} // end of "cynodelic::mulinum" namespace

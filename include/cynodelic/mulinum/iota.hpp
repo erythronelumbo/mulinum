@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -33,7 +33,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `iota`.
  */
-template <typename,typename,typename,typename>
+template <typename, typename, typename, typename>
 struct iota_impl {};
 
 
@@ -48,18 +48,18 @@ template <
 >
 struct iota_impl<
 	IntContainerTag,
-	integer_c<value_type_of<IntContainerTag>,Start>,
+	integer_c<value_type_of<IntContainerTag>, Start>,
 	size_c<Num>,
-	integer_c<value_type_of<IntContainerTag>,Increment>
+	integer_c<value_type_of<IntContainerTag>, Increment>
 >
 {
 	using type = concat<
-		make_from_tag_c<IntContainerTag,Start>,
+		make_from_tag_c<IntContainerTag, Start>,
 		typename iota_impl<
 			IntContainerTag,
-			integer_c<value_type_of<IntContainerTag>,(Start + Increment)>,
+			integer_c<value_type_of<IntContainerTag>, (Start + Increment)>,
 			size_c<Num - 1>,
-			integer_c<value_type_of<IntContainerTag>,Increment>
+			integer_c<value_type_of<IntContainerTag>, Increment>
 		>::type
 	>;
 };
@@ -75,12 +75,12 @@ template <
 >
 struct iota_impl<
 	IntContainerTag,
-	integer_c<value_type_of<IntContainerTag>,Start>,
+	integer_c<value_type_of<IntContainerTag>, Start>,
 	size_c<1>,
-	integer_c<value_type_of<IntContainerTag>,Increment>
+	integer_c<value_type_of<IntContainerTag>, Increment>
 >
 {
-	using type = make_from_tag_c<IntContainerTag,Start>;
+	using type = make_from_tag_c<IntContainerTag, Start>;
 };
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
@@ -105,9 +105,9 @@ template <
 	typename IntContainerTag,
 	typename Start,
 	typename Num,
-	typename Increment = integer_c<value_type_of<IntContainerTag>,1>
+	typename Increment = integer_c<value_type_of<IntContainerTag>, 1>
 >
-using iota = typename iota_impl<IntContainerTag,Start,Num,Increment>::type;
+using iota = typename iota_impl<IntContainerTag, Start, Num, Increment>::type;
 
 
 /**
@@ -133,9 +133,9 @@ template <
 >
 using iota_c = typename iota_impl<
 	IntContainerTag,
-	integer_c<value_type_of<IntContainerTag>,Start>,
+	integer_c<value_type_of<IntContainerTag>, Start>,
 	size_c<Num>,
-	integer_c<value_type_of<IntContainerTag>,Increment>
+	integer_c<value_type_of<IntContainerTag>, Increment>
 >::type;
 
 

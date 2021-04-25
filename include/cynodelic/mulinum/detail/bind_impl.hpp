@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,7 +30,7 @@ namespace detail
 	/**
 	 * @brief Helper for @ref bind.
 	 */
-	template <template <typename...> class,typename,typename>
+	template <template <typename...> class, typename, typename>
 	struct bind_impl;
 
 
@@ -43,7 +43,7 @@ namespace detail
 		typename... OtherArgs,
 		typename    ArgsVec
 	>
-	struct bind_impl<MetaFn,vector<FirstArg,OtherArgs...>,ArgsVec>
+	struct bind_impl<MetaFn, vector<FirstArg, OtherArgs...>, ArgsVec>
 	{
 		template <typename... Args>
 		struct apply_impl
@@ -51,7 +51,7 @@ namespace detail
 			using type = typename bind_impl<
 				MetaFn,
 				vector<OtherArgs...>,
-				push_back<ArgsVec,FirstArg> /* inserts the argument */
+				push_back<ArgsVec, FirstArg> /* inserts the argument */
 			>::template apply<Args...>::type;
 		};
 
@@ -69,7 +69,7 @@ namespace detail
 		typename... OtherArgs,
 		typename    ArgsVec
 	>
-	struct bind_impl<MetaFn,vector<arg<ArgNum>,OtherArgs...>,ArgsVec>
+	struct bind_impl<MetaFn, vector<arg<ArgNum>, OtherArgs...>, ArgsVec>
 	{
 		template <typename... Args>
 		struct apply_impl
@@ -99,7 +99,7 @@ namespace detail
 		typename... OtherArgs,
 		typename    ArgsVec
 	>
-	struct bind_impl<MetaFn,vector<bind<BindMetaFn,BindArgs...>,OtherArgs...>,ArgsVec>
+	struct bind_impl<MetaFn, vector<bind<BindMetaFn, BindArgs...>, OtherArgs...>, ArgsVec>
 	{
 		template <typename... Args>
 		struct apply_impl
@@ -109,7 +109,7 @@ namespace detail
 				vector<OtherArgs...>,
 				push_back<
 					ArgsVec,
-					typename bind<BindMetaFn,BindArgs...>::template apply<Args...>::type  /* applies a nesting `bind` to `Args...` */
+					typename bind<BindMetaFn, BindArgs...>::template apply<Args...>::type  /* applies a nesting `bind` to `Args...` */
 				>
 			>::template apply<Args...>::type;
 		};
@@ -131,7 +131,7 @@ namespace detail
 		template <typename... Args>
 		struct apply_impl
 		{
-			using type = apply<MetaFn,ArgsVec>; /* no arguments, ready for applying */
+			using type = apply<MetaFn, ArgsVec>; /* no arguments, ready for applying */
 		};
 
 		template <typename... Args>

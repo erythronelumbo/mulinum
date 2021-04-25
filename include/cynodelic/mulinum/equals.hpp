@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -25,7 +25,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `equals`.
  */
-template <typename Lhs,typename Rhs>
+template <typename Lhs, typename Rhs>
 struct equals_impl : false_ {};
 
 
@@ -33,7 +33,7 @@ struct equals_impl : false_ {};
  * @brief Helper for `equals`.
  */
 template <typename EqTypes>
-struct equals_impl<EqTypes,EqTypes> : true_ {};
+struct equals_impl<EqTypes, EqTypes> : true_ {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
 
@@ -42,10 +42,11 @@ struct equals_impl<EqTypes,EqTypes> : true_ {};
  * @ingroup comparators
  * @brief Equality checker
  *
- * Checks if two types are equal.
+ * Checks if two types `Lhs` and `Rhs` are equal, resulting in @ref true_ or
+ * @ref false_ .
  */
-template <typename Lhs,typename Rhs>
-using equals = typename equals_impl<Lhs,Rhs>::type;
+template <typename Lhs, typename Rhs>
+using equals = typename equals_impl<Lhs, Rhs>::type;
 
 
 }} // end of "cynodelic::mulinum" namespace

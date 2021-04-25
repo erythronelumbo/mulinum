@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Álvaro Ceballos
+// Copyright (c) 2021 Álvaro Ceballos
 // Distributed under the Boost Software License, Version 1.0.
 // See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt
 
@@ -30,7 +30,7 @@ namespace cynodelic { namespace mulinum {
 /**
  * @brief Helper for `curry`.
  */
-template <template <typename...> class MetaFn,std::size_t Arity,typename ArgsVec>
+template <template <typename...> class MetaFn, std::size_t Arity, typename ArgsVec>
 struct curry_impl
 {
 	template <typename Arg>
@@ -40,7 +40,7 @@ struct curry_impl
 		using apply = typename curry_impl<
 			MetaFn,
 			(Arity - 1),
-			push_back<ArgsVec,Arg>
+			push_back<ArgsVec, Arg>
 		>::template apply<NextArg>;
 	};
 
@@ -52,15 +52,15 @@ struct curry_impl
 /**
  * @brief Helper for `curry`.
  */
-template <template <typename...> class MetaFn,typename ArgsVec>
-struct curry_impl<MetaFn,1,ArgsVec>
+template <template <typename...> class MetaFn, typename ArgsVec>
+struct curry_impl<MetaFn, 1, ArgsVec>
 {
 	template <typename Arg>
 	struct apply_impl
 	{
 		using type = apply<
 			MetaFn,
-			push_back<ArgsVec,Arg>
+			push_back<ArgsVec, Arg>
 		>;
 	};
 
@@ -88,7 +88,7 @@ template <
 	template <typename...> class MetaFn,
 	std::size_t Arity = arity_of<MetaFn>::value
 >
-struct curry : curry_impl<MetaFn,Arity,vector<>> {};
+struct curry : curry_impl<MetaFn, Arity, vector<>> {};
 
 
 }} // end of "cynodelic::mulinum" namespace
