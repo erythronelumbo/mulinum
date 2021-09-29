@@ -61,7 +61,7 @@ struct find_impl<Item, vector<First, Others...>, Count> :
  */
 template <typename Item, std::size_t Count>
 struct find_impl<Item, vector<>, Count> :
-	size_c<-1>
+	size_c<(std::size_t)-1>
 {};
 
 
@@ -87,7 +87,7 @@ struct find_impl<Item, list_node<Head, Tail>, Count> :
  */
 template <typename Item, std::size_t Count>
 struct find_impl<Item, null_type, Count> :
-	size_c<-1>
+	size_c<(std::size_t)-1>
 {};
 
 
@@ -113,7 +113,7 @@ struct find_impl<integer_c<IntType, Item>, vector_c<IntType, First, Others...>, 
  */
 template <typename IntType, IntType Item, std::size_t Count>
 struct find_impl<integer_c<IntType, Item>, vector_c<IntType>, Count> :
-	size_c<-1>
+	size_c<(std::size_t)-1>
 {};
 
 
@@ -139,7 +139,7 @@ struct find_impl<integer_c<IntType, Item>, list_node_c<IntType, Head, Tail>, Cou
  */
 template <typename IntType, IntType Item, std::size_t Count>
 struct find_impl<integer_c<IntType, Item>, null_type, Count> :
-	size_c<-1>
+	size_c<(std::size_t)-1>
 {};
 
 
@@ -165,7 +165,7 @@ struct find_impl<char_c<Item>, string<First, Others...>, Count> :
  */
 template <char Item, std::size_t Count>
 struct find_impl<char_c<Item>, string<>, Count> :
-	size_c<-1>
+	size_c<(std::size_t)-1>
 {};
 
 #endif // DOXYGEN_SHOULD_SKIP_THIS
