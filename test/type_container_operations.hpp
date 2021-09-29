@@ -46,7 +46,7 @@ CYNODELIC_TESTER_SECTION(type_container_operations,vector)
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<double,cont_2>,mln::size_c<1>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<short,cont_2>,mln::size_c<2>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<unsigned,cont_2>,mln::size_c<3>>::value));
-	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<dummy<int>,cont_2>,mln::size_c<-1>>::value));
+	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<dummy<int>,cont_2>,mln::size_c<(std::size_t)-1>>::value));
 
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::fold_left<my_pair,cont_2>,fdl_res>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::fold_right<my_pair,cont_2>,fdr_res>::value));
@@ -136,7 +136,7 @@ CYNODELIC_TESTER_SECTION(type_container_operations,list)
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<double,cont_2>,mln::size_c<1>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<short,cont_2>,mln::size_c<2>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<unsigned,cont_2>,mln::size_c<3>>::value));
-	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<dummy<int>,cont_2>,mln::size_c<-1>>::value));
+	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<dummy<int>,cont_2>,mln::size_c<(std::size_t)-1>>::value));
 	
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::fold_left<my_pair,cont_2>,fdl_res>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::fold_right<my_pair,cont_2>,fdr_res>::value));

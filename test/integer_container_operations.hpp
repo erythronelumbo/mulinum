@@ -35,7 +35,7 @@ CYNODELIC_TESTER_SECTION(integer_container_operations,vector_c)
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<57>,cont_1>,mln::size_c<1>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<105>,cont_1>,mln::size_c<2>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<2>,cont_1>,mln::size_c<3>>::value));
-	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<999>,cont_1>,mln::size_c<-1>>::value));
+	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<999>,cont_1>,mln::size_c<((std::size_t)-1)>>::value));
 
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::iota<mln::vector_c_tag<int>,mln::int_c<10>,mln::size_c<10>>,mln::int_vector<10,11,12,13,14,15,16,17,18,19>>::value));
 
@@ -103,7 +103,7 @@ CYNODELIC_TESTER_SECTION(integer_container_operations,list_c)
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<57>,cont_1>,mln::size_c<1>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<105>,cont_1>,mln::size_c<2>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<2>,cont_1>,mln::size_c<3>>::value));
-	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<999>,cont_1>,mln::size_c<-1>>::value));
+	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::int_c<999>,cont_1>,mln::size_c<((std::size_t)-1)>>::value));
 
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::iota<mln::list_c_tag<int>,mln::int_c<10>,mln::size_c<10>>,mln::int_list<10,11,12,13,14,15,16,17,18,19>>::value));
 
@@ -167,7 +167,7 @@ CYNODELIC_TESTER_SECTION(integer_container_operations,string)
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::char_c<'r'>,cont_2>,mln::size_c<2>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::char_c<'l'>,cont_2>,mln::size_c<3>>::value));
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::char_c<'d'>,cont_2>,mln::size_c<4>>::value));
-	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::char_c<'s'>,cont_2>,mln::size_c<-1>>::value));
+	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::find<mln::char_c<'s'>,cont_2>,mln::size_c<((std::size_t)-1)>>::value));
 
 	CYNODELIC_TESTER_CHECK_TRUE((mln::equals<mln::iota<mln::string_tag,mln::char_c<'h'>,mln::size_c<10>>,mln::string<'h','i','j','k','l','m','n','o','p','q'>>::value));
 
