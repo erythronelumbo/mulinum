@@ -23,7 +23,7 @@
 
 #define CYNODELIC_MULINUM_VERSION_MAJOR 1 /**< @brief Major version of this library. */
 #define CYNODELIC_MULINUM_VERSION_MINOR 0 /**< @brief Minor version of this library. */
-#define CYNODELIC_MULINUM_VERSION_PATCH 1 /**< @brief Patch version of this library. */
+#define CYNODELIC_MULINUM_VERSION_PATCH 2 /**< @brief Patch version of this library. */
 
 
 /// @brief The version of this library.
