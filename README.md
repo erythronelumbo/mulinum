@@ -38,8 +38,12 @@ The documentation will be installed in `path/to/your/libraries/doc/cynodelic/mul
 
 ## To-do
 
-- Add more data types (e.g. map)
+- Re-define/change what *metafunction* means within this library
+- Define proper *concepts*
+- Optimize the library's functionalities where possible
+- Add more data types (e.g. *map*)
 - Add a functionality for *lambda expressions* if possible
 
 ## License
+
 This library is licensed under the Boost Software License.
