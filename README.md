@@ -1,5 +1,7 @@
 # Mulinum
 
+**Note: The use of this library is now discouraged and, so, it is obsolete. Use [Maihuenia](https://github.com/erythronelumbo/maihuenia) instead.**
+
 A header-only, template metaprogramming library for C++14.
 
 ## Requirements
